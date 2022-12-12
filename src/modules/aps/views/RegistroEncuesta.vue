@@ -2,15 +2,20 @@
   <v-container>
     <view-title/>
     <ValidationObserver
+        v-if="model"
         ref="formEncuesta"
         slim
     >
       <form-hogar
-          v-model="model.hogar"
-          :editing.sync="model.editing"
+          v-model="model"
+          :editing.sync="editing"
+      />
+      <integrantes-list
+          v-model="model"
+          class="my-4"
       />
       <v-window
-          v-if="!model.editing"
+          v-if="!editing"
           v-model="step"
           class="pa-1"
       >
@@ -38,12 +43,14 @@
                   @clickPrev="step--"
                   @clickNext="guardarSeccion(`${seccion.ref_seccion}Seccion${indexSeccion}`)"
                   @clickSave="guardarEncuesta"
+                  @clickFullSave="guardarEncuestaFull"
               />
             </ValidationObserver>
           </v-window-item>
         </template>
       </v-window>
     </ValidationObserver>
+    <global-loading :value="loading" absolute/>
   </v-container>
 </template>
 
@@ -52,11 +59,14 @@ import FactoresProtectores from '@/modules/aps/components/secciones/FactoresProt
 import HabitosConsumo from '@/modules/aps/components/secciones/HabitosConsumo'
 import Hogar from '@/modules/aps/models/Hogar'
 import NavegacionEncuesta from '@/modules/aps/components/NavegacionEncuesta'
-import FormHogar from "@/modules/aps/components/FormHogar";
+import FormHogar from '@/modules/aps/components/FormHogar'
+import IntegrantesList from '@/modules/aps/components/IntegrantesList'
+import APSMixin from '@/modules/aps/mixins/APSMixin'
 
 export default {
   name: 'RegistroEncuesta',
-  components: {FormHogar, NavegacionEncuesta, FactoresProtectores, HabitosConsumo},
+  mixins:[APSMixin],
+  components: {IntegrantesList, FormHogar, NavegacionEncuesta, FactoresProtectores, HabitosConsumo},
   props: {
     uuid: {
       type: String,
@@ -65,10 +75,9 @@ export default {
   },
   data: () => ({
     step: 1,
-    model: {
-      editing: true,
-      hogar: null
-    }
+    loading: false,
+    editing: true,
+    model: null,
   }),
   watch: {
     model: {
@@ -81,54 +90,60 @@ export default {
   },
   computed: {
     seccionesHabilitadas() {
-      return Object.values(this.model.hogar.secciones).filter(x => x.show)
+      return this.model?.secciones ? Object.values(this.model.secciones).filter(x => x.show) : []
     }
   },
   created() {
-    this.model.hogar = this.clone(Hogar)
-    this.getPreguntas()
+    this.getEncuesta()
+    this.getComplementos()
   },
   methods: {
-    async getPreguntas() {
-      await this.$store.dispatch('aps/getPreguntas')
+    async getEncuesta(){
+      this.loading = true
+      this.model = this.uuid ? await this.encuestaGet(this.uuid) : this.clone(Hogar)
+      this.editing = !this.uuid
+      this.loading = false
     },
-    guardarEncuesta() {
+    async getComplementos() {
+      await this.$store.dispatch('aps/getPreguntas')
+      await this.$store.dispatch('aps/getTiposIdentificacion')
+    },
+    async guardarEncuesta() {
+      this.loading = true
+      this.model.encuesta = this.clone(this.model)
       const copia = this.clone(this.model)
-      copia.hogar.secciones = Object.values(copia.hogar.secciones)
-      copia.hogar.secciones.forEach(x => {
-        Object.entries(x.respuestas).map(z => {
-          x.respuestas[z[0]] = z[1].model
-        })
-      })
-      console.log('guardar Encuesta Final', copia)
-      this.$refs.formEncuesta.validate().then(result => {
+      await this.encuestaSave({hogar: copia})
+      this.loading = false
+    },
+    guardarEncuestaFull() {
+      this.$refs.formEncuesta.validate().then(async result => {
         if (result) {
           this.loading = true
-          this.axios.post('respuestas', copia)
-              .then(() => {
-                this.$router.replace(`/aps/resultado-encuesta/${copia.hogar.id}`)
-              })
-              .catch(error => {
-                this.$store.commit('snackbar/setError', {error})
-              })
-          .finally(() => { this.loading = false })
+          this.model.encuesta = this.clone(this.model)
+          const copia = this.clone(this.model)
+          const response = await this.encuestaSaveFull({hogar: copia})
+          if(response) this.$router.replace(`/aps/resultado-encuesta/${copia.id}`)
+          this.loading = false
         }
       })
     },
     guardarSeccion(seccion) {
-      this.$refs[seccion][0].validate().then(result => {
+      this.$refs[seccion][0].validate().then(async result => {
         if (result) {
-          console.log('fffff', result)
-          this.step++
+          this.loading = true
+          this.model.encuesta = this.clone(this.model)
+          const copia = this.clone(this.model)
+          const response = await this.encuestaSave({hogar: copia})
+          if(response) this.step++
+          this.loading = false
         }
         else {
-          this.step++
           this.$store.commit('snackbar/set', { color:'warning', message: 'Hay preguntas por diligenciar.' })
         }
       })
     },
     validaLogica() {
-      // this.model.hogar.secciones.factores_protectores.respuestas.tipo_familia.show = this.model.hogar.secciones.factores_protectores.respuestas.problemas_consumo_alcoholicas.model === 4
+      // this.model.secciones.factores_protectores.respuestas.tipo_familia.show = this.hogar.secciones.factores_protectores.respuestas.problemas_consumo_alcoholicas.model === 4
     }
   }
 }

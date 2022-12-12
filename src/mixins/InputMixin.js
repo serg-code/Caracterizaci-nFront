@@ -26,7 +26,7 @@ export default {
     },
     rules: {
       type: [String, Object],
-      default: null,
+      default: '',
     },
     readonly: {
       type: Boolean,
@@ -77,10 +77,10 @@ export default {
     isRequired() {
       if (!this.rules) return false
       if (typeof this.rules === 'string') {
-        return this.rules.toLowerCase().includes('required')
+        return this.rules?.toLowerCase()?.includes('required')
       }
 
-      return this.rules.required
+      return this.rules?.required
     }
   }
 }

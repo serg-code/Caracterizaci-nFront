@@ -12,7 +12,7 @@
       <span class="white--text">Anterior</span>
       <v-icon color="white">mdi-chevron-left</v-icon>
     </v-btn>
-    <v-btn color="blue">
+    <v-btn color="blue" @click="$emit('clickSave')">
       <span class="white--text">Guardar</span>
       <v-icon color="white">mdi-content-save</v-icon>
     </v-btn>
@@ -28,7 +28,7 @@
     <v-btn
         v-if="saveBtn"
         color="primary"
-        @click="$emit('clickSave')"
+        @click="$emit('clickFullSave')"
     >
       <span class="white--text">Finalizar</span>
       <v-icon color="white">mdi-check-bold</v-icon>

@@ -1,6 +1,9 @@
 <template>
 <v-card>
-  <v-card-title :class="editing ? '' : 'pb-0'">Identificación del Hogar</v-card-title>
+  <v-card-title :class="editing ? '' : 'pb-0'">
+    <v-icon large class="mr-1">mdi-home</v-icon>
+    Identificación del Hogar
+  </v-card-title>
   <v-list
       v-if="!editing"
       class="pa-0"
@@ -102,7 +105,7 @@
     </ValidationObserver>
     <v-card-actions>
       <v-spacer/>
-      <v-btn text @click="cancelar">
+      <v-btn text @click="cancelar(1)">
         Cancelar
       </v-btn>
       <v-btn color="primary" @click="save">
@@ -117,9 +120,12 @@
 <script>
 import {mapState} from 'vuex'
 import InputGeolocation from '@/components/input/InputGeolocation'
+import APSMixin from '@/modules/aps/mixins/APSMixin'
+import {uuid} from 'vue-uuid'
 
 export default {
   name: 'FormHogar',
+  mixins:[APSMixin],
   components: {InputGeolocation},
   props: {
     value: {
@@ -128,7 +134,7 @@ export default {
     },
     editing: {
       type:Boolean,
-      default: true
+      default: false
     }
   },
   data:() => ({
@@ -151,30 +157,31 @@ export default {
   },
   methods: {
     save() {
-      this.$refs.formHogar.validate().then(result => {
+      this.$refs.formHogar.validate().then(async result => {
         if (result) {
           this.loading = true
           const copy = this.clone(this.model)
-          copy.secciones = []
-          this.axios.post('respuestas', {hogar: copy})
-              .then(({data}) => {
-                if(data?.data?.hogar) this.model.id = data.data.hogar.id
-                this.$emit('input', this.model)
-                this.cancelar()
-              })
-              .catch(error => {
-                this.$store.commit('snackbar/setError', {error})
-              })
-              .finally(() => { this.loading = false })
+          if(!copy.id) copy.id = uuid.v1()
+          copy.encuesta = JSON.stringify(this.clone(copy))
+          const data = this.clone(copy)
+          data.secciones = null
+          const response = await this.encuestaSave({hogar: data})
+          this.loading = false
+          if(response) {
+            this.$emit('input', copy)
+            this.cancelar(copy.id)
+          }
         }
       })
     },
     editar() {
       this.$emit('update:editing', true)
     },
-    cancelar() {
-      if(this.model.id) this.$emit('update:editing', false)
-      else this.$router.go(-1)
+    cancelar(close) {
+      console.log('this.model.id', this.model.id)
+      if(close === 1 && !this.model.id) this.$router.go(-1)
+      else if(!this.$route.params?.uuid) this.$router.replace({name:'RegistroEncuestaAPS', params: {uuid: close}})
+      this.$emit('update:editing', false)
     }
   }
 }

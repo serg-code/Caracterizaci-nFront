@@ -9,6 +9,7 @@
         v-if="items && items.length <= 5 && !noRadio"
         v-model="model"
         :error-messages="errors"
+        :hide-details="hideDetails"
     >
       <template
           v-if="label"
@@ -24,7 +25,7 @@
       </template>
       <template v-for="(item, indexItem) in items">
         <v-radio
-            :key="`radio${item.id}-${indexItem}`"
+            :key="`radio${item && item.id || ''}-${indexItem}`"
             :value="item[itemValue]"
         >
           <template v-slot:label>

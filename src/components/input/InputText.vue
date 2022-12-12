@@ -96,10 +96,10 @@ export default {
   },
   computed: {
     maxLength() {
-      return this.maxlength || (this.type === 'text' ? 254 : 12)
+      return this.maxlength || (['text', 'email'].find(x => x === this.type) ? 254 : 12)
     },
     mask() {
-      return (this.type === 'text' ? 'X' : '#').repeat(this.maxLength)
+      return (['text', 'email'].find(x => x === this.type) ? 'X' : '#').repeat(this.maxLength)
     },
     model: {
       get() {

@@ -9,9 +9,9 @@ const getters = {
     itemsMenu: (state, getters, rootState, rootGetters) => {
         let menuPrincipal = []
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'inicio'))
-        if(rootGetters['auth/permissionByName']('usuarios.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'usuarios'))
-        if(rootGetters['auth/permissionByName']('roles.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'roles'))
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'encuestasAPS'))
+        menuPrincipal.push(state.itemsMenu.find(x => x.id === 'usuarios'))
+        if(rootGetters['auth/permissionByName']('roles.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'roles'))
         return menuPrincipal
     }
 }

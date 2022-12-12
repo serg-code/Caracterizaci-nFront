@@ -1,8 +1,10 @@
 <template>
-  <v-card style="height: 100%; width: 500px;">
+  <v-card id="container-chart" height="400">
+    <v-card-title>Riesgo de hogar</v-card-title>
     <v-chart
         ref="charGauge"
         class="chart"
+        autoresize
         :option="option"
     />
   </v-card>
@@ -135,7 +137,7 @@
               fontSize: 14,
               formatter: `Riesgo ${value} (${((value*100)/total).toFixed(2)}%)`,
               color: '#555',
-              offsetCenter: [0, '34%']
+              offsetCenter: [0, '35%']
             },
             data: [
               {
@@ -145,20 +147,20 @@
           }
         ]
       })
-      setTimeout(() => {
-        const elChart = document.querySelector('.chart')
-        elChart.style.height = '250px'
-      }, 4000)
+      // setTimeout(() => {
+      //   const elChart = document.querySelector('.chart')
+      //   elChart.style.height = '250px'
+      // }, 4000)
       return { option, percetn, charGauge };
     }
   });
 </script>
 
-<style>
+<style lang="scss">
   .chart {
     position: relative;
-    height: 300px;
     overflow: hidden;
+    height: inherit;
     padding: 0 !important;
   }
 </style>

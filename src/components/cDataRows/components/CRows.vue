@@ -7,7 +7,8 @@
             cols="12"
             sm="4"
             md="3"
-            class="d-flex justify-start"
+            class="d-flex"
+            :class="`justify-${$vuetify.breakpoint.xsOnly ? 'center' : 'start'}`"
           >
             <v-select
               v-if="isOnline"
@@ -523,21 +524,22 @@ export default {
             const urlString = await this.makeUrl()
             const { data } = await axios.get(urlString)
 
-            if (data) {
-              this.dataPagination.itemsLength = data.total
-              this.dataPagination.itemsPerPage = parseInt(data.per_page, 10)
-              this.dataPagination.lastPage = data.last_page
-              this.dataPagination.from = data.from
-              this.dataPagination.to = data.to
+            console.log('data table', data.data)
+            if (data.data) {
+              this.dataPagination.itemsLength = data.data.total
+              this.dataPagination.itemsPerPage = parseInt(data.data.per_page, 10)
+              this.dataPagination.lastPage = data.data.last_page
+              this.dataPagination.from = data.data.from
+              this.dataPagination.to = data.data.to
               // eslint-disable-next-line no-nested-ternary
-              this.dataPagination.next = data.total ? data.next_page_url : data.next_page_url ? this.dataPagination.currentPage + 1 : null
+              this.dataPagination.next = data.data.total ? data.data.next_page_url : data.data.next_page_url ? this.dataPagination.currentPage + 1 : null
               // eslint-disable-next-line no-nested-ternary
-              this.dataPagination.prev = data.total ? data.prev_page_url : data.prev_page_url ? this.dataPagination.currentPage - 1 : null
-              data.data.forEach(x => {
+              this.dataPagination.prev = data.data.total ? data.data.prev_page_url : data.data.prev_page_url ? this.dataPagination.currentPage - 1 : null
+              data.data.data.forEach(x => {
                 // eslint-disable-next-line no-param-reassign
                 x.loading = false
               })
-              this.items = Object.freeze(data.data)
+              this.items = Object.freeze(data.data.data)
               // eslint-disable-next-line no-mixed-operators
               this.filtersTags = this?.$slots?.filters && this.$slots.filters[0] && this.$slots.filters[0].componentInstance?.$data?.model || {}
             }
@@ -548,7 +550,7 @@ export default {
               })
           }
         } catch (e) {
-          store.commit('snackbar/setSnackbarError', {
+          store.commit('snackbar/setError', {
             message: 'Error al hacer la busqueda de registros.',
             e,
           })

@@ -17,7 +17,8 @@ const Hogar = {
     secciones: {
         factores_protectores: FactoresProtectores,
         habitos_consumo: HabitosConsumo,
-    }
+    },
+    integrantes:[]
 }
 
 export default Hogar

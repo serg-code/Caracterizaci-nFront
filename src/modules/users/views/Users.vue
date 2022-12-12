@@ -5,10 +5,10 @@
         <c-tooltip tooltip="Nueva encuesta" top>
           <v-btn
               color="primary"
-              :to="{name: 'RegistroEncuestaAPS'}"
+              @click="register()"
           >
             <v-icon class="white--text">mdi-plus</v-icon>
-            Encuesta
+            Usuario
           </v-btn>
         </c-tooltip>
       </template>
@@ -16,8 +16,8 @@
     <v-row>
       <v-col cols="12">
         <c-rows
-            name="rowsEncuestas"
-            route="hogar"
+            name="rowsUsers"
+            route="usuarios"
             :make-headers="itemsHeaders"
             :initial-run="true"
         >
@@ -31,12 +31,6 @@
                 hide-default-footer
                 disable-pagination
             >
-              <template v-slot:item.ubicacion="{ item }">
-                <div style="display: grid;">
-                  <span class="font-weight-bold">{{ item.direccion }}</span>
-                  <span>Puntaje: {{ item.puntaje_obtenido }}</span>
-                </div>
-              </template>
               <template v-slot:item.options="{ item }">
                 <options-buttons
                     :loading="item.loading"
@@ -50,27 +44,45 @@
         </c-rows>
       </v-col>
     </v-row>
+    <register-user
+        v-model="registerDialog"
+        :user="selectedItem"
+        @saved="rowsReload"
+    />
   </v-container>
 </template>
 
 <script>
+import RegisterUser from '@/modules/users/components/RegisterUser'
 export default {
-  name: 'ListEncuestas',
+  name: 'ListUsers',
+  components: {RegisterUser},
   data:() => ({
     itemsHeaders: [
       {
-        text: 'ID',
-        value: 'id',
+        text: 'Nombre',
+        value: 'name',
       },
       {
-        text: 'Ubicación',
-        value: 'ubicacion',
+        text: 'Correo electrónico',
+        value: 'Email',
       },
       {
         value: 'options',
         visibleColumnSelectable: false,
       }
-    ]
-  })
+    ],
+    registerDialog: false,
+    selectedItem: null,
+  }),
+  methods: {
+    register(item) {
+      this.selectedItem = item
+      this.registerDialog = true
+    },
+    rowsReload() {
+      this.store.commit('dataRows/setReloadRows', 'rowsUsers')
+    }
+  }
 }
 </script>
