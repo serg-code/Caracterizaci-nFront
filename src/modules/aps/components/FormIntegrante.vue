@@ -80,6 +80,16 @@
               />
             </v-col>
             <v-col cols="12" md="6">
+              <input-date
+                  v-model="model.fecha_nacimiento"
+                  name="Fecha de nacimiento"
+                  label="Fecha de nacimiento"
+                  rules="required"
+                  birth
+                  :max="moment().format('YYYY-MM-DD')"
+              />
+            </v-col>
+            <v-col cols="12" md="6">
               <input-select
                   v-model="model.rh"
                   :items="rhs"

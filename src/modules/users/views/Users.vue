@@ -81,7 +81,7 @@ export default {
       this.registerDialog = true
     },
     rowsReload() {
-      this.store.commit('dataRows/setReloadRows', 'rowsUsers')
+      this.$store.commit('dataRows/setReloadRows', 'rowsUsers')
     }
   }
 }

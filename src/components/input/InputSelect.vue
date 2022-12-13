@@ -10,6 +10,7 @@
         v-model="model"
         :error-messages="errors"
         :hide-details="hideDetails"
+        class="ma-0"
     >
       <template
           v-if="label"

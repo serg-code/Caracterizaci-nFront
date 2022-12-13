@@ -6,6 +6,8 @@ import BaseCard from '@/components/BaseCard.vue'
 import InputText from '@/components/input/InputText.vue'
 import InputPassword from '@/components/input/InputPassword.vue'
 import InputSelect from '@/components/input/InputSelect.vue'
+import InputDate from '@/components/input/InputDate.vue'
+import InputTextArea from '@/components/input/InputTextArea.vue'
 import ViewTitle from '@/components/ViewTitle.vue'
 import CTooltip from '@/components/CTooltip.vue'
 import CConfirm from '@/components/CConfirm.vue'
@@ -23,6 +25,8 @@ Vue.use({
     Vue.component('InputText', InputText)
     Vue.component('InputPassword', InputPassword)
     Vue.component('InputSelect', InputSelect)
+    Vue.component('InputDate', InputDate)
+    Vue.component('InputTextArea', InputTextArea)
     Vue.component('CRows', CRows)
     Vue.component('OptionsButtons', OptionsButtons)
 

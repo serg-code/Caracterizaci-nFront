@@ -131,9 +131,9 @@ export default {
                   this.resetData()
                 }, 400)
               })
-              .catch(e => {
+              .catch(error => {
                 this.loading = false
-                this.$store.commit('snackbar/setError', {color: 'error', message: 'Error al cambiar la contraseña.', error: e})
+                this.$store.commit('snackbar/setError', {color: 'error', message: 'Error al cambiar la contraseña.', error})
           })
         }
       })

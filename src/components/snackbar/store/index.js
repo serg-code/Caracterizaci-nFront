@@ -16,14 +16,15 @@ const mutations = {
     }
   },
   setError(state, data) {
-    const message = `${data.error?.response?.data?.message}`
-    const errors = Object.values(data.error?.response?.data?.errors || {})
+    console.log('data', data.error.response.data)
+    const message = `${data?.error?.response?.data?.mensaje || data?.error?.response?.data?.message || data?.message || ''}`
+    const errors = Object.values(data?.error?.response?.data?.data || {})
     const textErrors = errors.join('<br/>')
     const timeout = (errors.length || 1) * 5000
 
     state.snackbar = {
       timeout: timeout || 5000,
-      message: [message, textErrors].join('<br/>') || '',
+      message: [message ? `<strong>${message}</strong>` : '', textErrors].join('<br/>') || '',
       color: data.color || 'error'
     }
   }

@@ -25,7 +25,7 @@ export default {
         async encuestaSave(encuesta) {
             return await new Promise(resolve => {
                 encuesta.hogar.secciones = encuesta.hogar.secciones ? this.convertirSecciones(encuesta.hogar.secciones) : []
-                this.axios.post('respuestas', encuesta)
+                this.axios.post('hogar', encuesta)
                     .then(({data}) => resolve(data?.data?.hogar || null))
                     .catch(error => {
                         this.$store.commit('snackbar/setError', {error})
@@ -36,7 +36,7 @@ export default {
         async encuestaSaveFull(encuesta) {
             return await new Promise(resolve => {
                 encuesta.hogar.secciones = encuesta.hogar.secciones ? this.convertirSecciones(encuesta.hogar.secciones) : []
-                this.axios.post('respuestas/completo', encuesta)
+                this.axios.post('hogar/completo', encuesta)
                     .then(({data}) => resolve(data?.data?.hogar || null))
                     .catch(error => {
                         this.$store.commit('snackbar/setError', {error})

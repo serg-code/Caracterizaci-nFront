@@ -19,6 +19,32 @@
         <template slot="title">{{ model.id ? 'Edición' : 'Creación' }} de usuario</template>
         <v-card-text class="mt-4">
           <v-row>
+            <v-col cols="12">
+              <input-text
+                  v-model="model.name"
+                  label="Nombre"
+                  name="Nombre"
+                  rules="required"
+              />
+            </v-col>
+            <v-col cols="12">
+              <input-text
+                  v-model="model.email"
+                  label="Correo electrónico"
+                  name="Correo electrónico"
+                  type="email"
+                  rules="required|email"
+              />
+            </v-col>
+            <v-col cols="12">
+              <input-select
+                  v-model="model.activo"
+                  :items="[{text: 'Activo', value: 1}, {text: 'Inactivo', value: 0}]"
+                  name="Estado"
+                  label="Estado"
+                  rules="required"
+              />
+            </v-col>
           </v-row>
         </v-card-text>
       </template>
@@ -43,7 +69,7 @@ export default {
     loading: false,
     makeModel: {
       id: null,
-      activo: 1,
+      activo: null,
       email: null,
       name: null,
       password: null,
@@ -75,7 +101,7 @@ export default {
             .then(({ data }) => {
               this.model = { ...this.makeModel, ...(data || {}) }
             })
-            .catch(e => this.$store.commit('snackbar/setError', { e }))
+            .catch(error => this.$store.commit('snackbar/setError', { error }))
             .finally(() => { this.loading = false })
       }
     },
@@ -89,7 +115,7 @@ export default {
               this.$emit('saved')
               close()
             })
-            .catch(e => this.$store.commit('snackbar/setError', { e }))
+            .catch(error => this.$store.commit('snackbar/setError', { error }))
             .finally(() => { this.loading = false })
       }
     },

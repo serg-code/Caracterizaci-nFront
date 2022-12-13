@@ -1,7 +1,7 @@
 import PropsRespuesta from '@/modules/aps/models/PropsRespuesta'
 const Accidentes = {
     component: 'IntegranteAccidentes',
-    ref_seccion: 'acccidentes',
+    ref_seccion: 'accidentes',
     descripcion: 'ACCIDENTES',
     show: true,
     respuestas: {

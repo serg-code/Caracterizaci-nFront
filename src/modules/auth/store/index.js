@@ -41,8 +41,8 @@ const actions = {
                     context.commit('setDefaultAxios')
                     resolve(true)
                 })
-                .catch((error) => {
-                    context.commit('snackbar/setError', { color: 'error', message: `Error ${error?.response?.status || ''} al iniciar sesión. ${error?.response?.status === 401 ? 'Credenciales incorrectas.' : ''}` }, { root: true })
+                .catch(error => {
+                    context.commit('snackbar/setError', { error }, { root: true })
                     resolve(false)
                 })
         })

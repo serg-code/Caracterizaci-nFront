@@ -549,10 +549,10 @@ export default {
                 this.items = Object.freeze(data)
               })
           }
-        } catch (e) {
+        } catch (error) {
           store.commit('snackbar/setError', {
             message: 'Error al hacer la busqueda de registros.',
-            e,
+            error,
           })
         }
         setTimeout(() => {
