@@ -1,7 +1,7 @@
 import PropsRespuesta from '@/modules/aps/models/PropsRespuesta'
 const CuidadosDomiciliarios = {
     component: 'CuidadosDomiciliarios',
-    ref_seccion: 'cuidados_domiciliario',
+    ref_seccion: 'cuidados_domiciliarios',
     descripcion: 'Cuidados domiciliarios',
     show: true,
     respuestas: {

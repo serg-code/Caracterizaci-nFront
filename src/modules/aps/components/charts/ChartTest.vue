@@ -1,6 +1,6 @@
 <template>
   <v-card id="container-chart" height="400">
-    <v-card-title>Riesgo de hogar</v-card-title>
+    <slot name="title" />
     <v-chart
         ref="charGauge"
         class="chart"
@@ -11,17 +11,17 @@
 </template>
 
 <script>
-  import { use } from "echarts/core";
-  import { CanvasRenderer } from "echarts/renderers";
-  import { GaugeChart } from "echarts/charts";
+  import { use } from 'echarts/core'
+  import { CanvasRenderer } from 'echarts/renderers'
+  import { GaugeChart } from 'echarts/charts'
   import { graphic } from 'echarts'
   import {
     TitleComponent,
     TooltipComponent,
     LegendComponent
-  } from "echarts/components";
-  import VChart, { THEME_KEY } from "vue-echarts";
-  import {ref, defineComponent, computed} from "vue";
+  } from 'echarts/components'
+  import VChart, { THEME_KEY } from 'vue-echarts'
+  import {ref, defineComponent, computed} from 'vue'
 
   use([
     CanvasRenderer,
@@ -32,17 +32,23 @@
   ]);
 
   export default defineComponent({
-    name: "EngageGaugeChart",
+    name: 'ResultadoGaugeChart',
     components: {
       VChart
     },
-    provide: {
-      [THEME_KEY]: "light"
+    props:{
+      puntaje: {
+        type: Number,
+        default: 0
+      }
     },
-    setup () {
+    provide: {
+      [THEME_KEY]: 'light'
+    },
+    setup (props) {
       const charGauge = ref(null)
-      const total = 154
-      const value = 77.0733
+      const total = 150
+      const value = props.puntaje
       const percetn = computed(() => option.value.series[0].data[0].value / total)
       const option = ref({
         overflow: 'hidden',
@@ -50,12 +56,11 @@
         series: [
           {
             min: 0,
-            max: 154,
+            max: 150,
             type: 'gauge',
             startAngle: 180,
             endAngle: 0,
             splitNumber: 4,
-            height: '400',
             axisLine: {
               // roundCap: true,
               lineStyle: {

@@ -57,32 +57,30 @@
                 @inputObject="val => model.municipioObj = val"
             />
           </v-col>
-          <!--      <v-col cols="12" md="6">-->
-          <!--        <input-select-->
-          <!--            v-model="model.zona"-->
-          <!--            :items="zonas"-->
-          <!--            :disabled="!model.cod_mun"-->
-          <!--            item-text="nombre"-->
-          <!--            item-value="codigo"-->
-          <!--            name="Zona"-->
-          <!--            label="Zona"-->
-          <!--            rules="required"-->
-          <!--            no-radio-->
-          <!--        />-->
-          <!--      </v-col>-->
-          <!--      <v-col cols="12" md="6">-->
-          <!--        <input-select-->
-          <!--            v-model="model.barrio"-->
-          <!--            :items="barrios"-->
-          <!--            :disabled="!model.zona"-->
-          <!--            item-text="nombre"-->
-          <!--            item-value="codigo_dane"-->
-          <!--            name="Barrio"-->
-          <!--            label="Barrio"-->
-          <!--            rules="required"-->
-          <!--            no-radio-->
-          <!--        />-->
-          <!--      </v-col>-->
+                <v-col cols="12" md="6">
+                  <input-select
+                      v-model="model.zona"
+                      :items="zonas"
+                      :disabled="!model.cod_mun"
+                      name="Zona"
+                      label="Zona"
+                      rules="required"
+                      no-radio
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <search-barrios
+                      v-model="model.barrio_vereda_id"
+                      :disabled="!model.zona"
+                      :municipio="model.cod_mun"
+                      :zona="model.zona"
+                      item-text="nombre"
+                      item-value="id"
+                      name="Barrio"
+                      label="Barrio"
+                      rules="required"
+                  />
+                </v-col>
           <v-col cols="12">
             <input-text
                 v-model="model.direccion"
@@ -122,11 +120,12 @@ import {mapState} from 'vuex'
 import InputGeolocation from '@/components/input/InputGeolocation'
 import APSMixin from '@/modules/aps/mixins/APSMixin'
 import {uuid} from 'vue-uuid'
+import SearchBarrios from '@/modules/aps/components/input/SearchBarrios'
 
 export default {
   name: 'FormHogar',
   mixins:[APSMixin],
-  components: {InputGeolocation},
+  components: {SearchBarrios, InputGeolocation},
   props: {
     value: {
       type:Object,
@@ -142,7 +141,7 @@ export default {
     loading: false
   }),
   computed: {
-    ...mapState('aps',['departamentos', 'municipios', 'barrios', 'zonas']),
+    ...mapState('aps',['departamentos', 'municipios', 'zonas']),
     municipiosHogar() {
       return (this.model?.cod_dpto && this.municipios?.length && this.municipios.filter(x => x.codigo_departamento === this.model.cod_dpto)) || []
     }

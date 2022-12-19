@@ -1,3 +1,5 @@
+import {uuid} from "vue-uuid";
+
 export default {
     methods: {
         async integranteSave(data) {
@@ -60,9 +62,32 @@ export default {
                     })
             })
         },
+        async encuestaResultGet(uuid) {
+            return await new Promise(resolve => {
+                this.axios.get(`hogar/${uuid}`)
+                    .then(({data}) => {
+                        if(data?.data) resolve(data.data)
+                        else resolve(null)
+                    })
+                    .catch(error => {
+                        this.$store.commit('snackbar/setError', {error})
+                        resolve(null)
+                    })
+            })
+        },
+        convertirDataIntegrante(dataEncuesta, copiaIntegrante){
+            if(!copiaIntegrante.id) copiaIntegrante.id = uuid.v1()
+            copiaIntegrante.hogar_id = dataEncuesta.id
+            const indexIntegrante = dataEncuesta.integrantes.findIndex(x => x.id === copiaIntegrante.id)
+            if(indexIntegrante > -1) dataEncuesta.integrantes.splice(indexIntegrante, 1)
+            dataEncuesta.integrantes.splice(0, 0, copiaIntegrante)
+            dataEncuesta.encuesta = this.clone(dataEncuesta)
+            const dataIntegrante = this.clone(copiaIntegrante)
+            return {dataEncuesta, dataIntegrante, copiaIntegrante}
+        },
         convertirSecciones(secciones) {
-            secciones = Object.values(secciones)
-            secciones.forEach(x => {
+            // secciones = Object.values(secciones)
+            Object.values(secciones).forEach(x => {
                 Object.entries(x.respuestas).map(z => {
                     x.respuestas[z[0]] = z[1].model
                 })

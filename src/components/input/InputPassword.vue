@@ -47,8 +47,8 @@ export default {
   mixins: [InputMixin],
   props: {
     value: {
-      type: [String, Number],
-      default: null,
+      type: String,
+      default: 'password',
     },
   },
   data: () => ({

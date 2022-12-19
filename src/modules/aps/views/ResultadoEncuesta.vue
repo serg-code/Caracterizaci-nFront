@@ -1,9 +1,36 @@
 <template>
   <v-container>
     <view-title :subtitle="uuid"/>
-    <v-row>
+    <v-row  v-if="model">
       <v-col cols="12" md="6" xl="4">
-        <chart-test/>
+        <chart-test :puntaje="model.puntaje_obtenido">
+          <template v-slot:title>
+            <v-card-title>
+              <v-icon class="mr-2">mdi-home</v-icon>
+              Riesgo de hogar
+            </v-card-title>
+            <v-card-subtitle>&nbsp;</v-card-subtitle>
+          </template>
+        </chart-test>
+      </v-col>
+      <v-col
+          v-for="(integrante, indexIntegrante) in model.integrantes"
+          :key="`integrante${indexIntegrante}${integrante.id}`"
+          cols="12"
+          md="6"
+          xl="4"
+      >
+        <chart-test :puntaje="integrante.puntaje_obtenido">
+          <template v-slot:title>
+            <v-card-title>
+              <v-icon class="mr-2">mdi-face-{{integrante.sexo ? 'man' : 'woman'}}</v-icon>
+              {{ [integrante.tipo_identificacion, integrante.identificacion].filter(x => x).join('') }}
+            </v-card-title>
+            <v-card-subtitle>
+              {{ [integrante.primer_nombre, integrante.segundo_nombre, integrante.primer_apellido, integrante.segundo_apellido].filter(x => x).join(' ') }}
+            </v-card-subtitle>
+          </template>
+        </chart-test>
       </v-col>
     </v-row>
     <global-loading :value="loading" absolute/>
@@ -33,7 +60,7 @@ export default {
   methods: {
     async getEncuesta(){
       this.loading = true
-      this.model = await this.encuestaGet(this.uuid)
+      this.model = await this.encuestaResultGet(this.uuid)
       this.loading = false
     }
   }

@@ -47,6 +47,27 @@ export default {
         this.$emit('input', val)
       }
     }
+  },
+  watch:{
+    model:{
+      handler(){
+        this.validaLogica()
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  methods: {
+    validaLogica() {
+      this.accidentesTransito()
+    },
+    accidentesTransito(){
+      if(this.model.respuestas.accidentes_transito.model === 69) this.model.respuestas.tipo_lesion.show = true
+      else {
+        this.model.respuestas.tipo_lesion.show = false
+        this.model.respuestas.tipo_lesion.model = null
+      }
+    }
   }
 }
 </script>

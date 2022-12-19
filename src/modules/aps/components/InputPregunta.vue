@@ -1,7 +1,10 @@
 <template>
   <v-col
       v-if="model.show"
-      cols="12"
+      :cols="cols"
+      :sm="sm || cols"
+      :md="md || sm || cols"
+      :lg="lg || md || sm || cols"
   >
     <input-select
         v-if="pregunta.tipo === 'seleccion' || pregunta.tipo === 'seleccion_multiple'"
@@ -64,6 +67,22 @@ export default {
     rules: {
       type: String,
       default: 'required',
+    },
+    cols: {
+      type: String,
+      default: '12',
+    },
+    sm: {
+      type: String,
+      default: '',
+    },
+    md: {
+      type: String,
+      default: '',
+    },
+    lg: {
+      type: String,
+      default: '',
     },
   },
   computed: {

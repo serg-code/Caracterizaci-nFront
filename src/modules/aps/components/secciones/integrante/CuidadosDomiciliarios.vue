@@ -12,10 +12,20 @@
             :respuesta="model.respuestas.cuidados_domiciliarios"
             :pregunta="preguntasIntegrante.cuidados_domiciliarios"
         />
-        <input-pregunta
-            :respuesta="model.respuestas.diagnostico_principal"
-            :pregunta="preguntasIntegrante.diagnostico_principal"
-        />
+
+        <v-col
+            v-if="model.respuestas.diagnostico_principal.show"
+            cols="12"
+        >
+          <search-cie10
+              v-model="model.respuestas.diagnostico_principal.model"
+              item-text="descrip"
+              item-value="codigo"
+              :name="preguntasIntegrante.diagnostico_principal.descripcion"
+              :label="preguntasIntegrante.diagnostico_principal.descripcion"
+              rules="required"
+          />
+        </v-col>
         <input-pregunta
             :respuesta="model.respuestas.causa"
             :pregunta="preguntasIntegrante.causa"
@@ -40,9 +50,10 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import SearchCie10 from "@/modules/aps/components/input/SearchCie10";
 export default {
   name: 'CuidadosDomiciliarios',
-  components: {InputPregunta},
+  components: {SearchCie10, InputPregunta},
   props: {
     seccion: {
       type:Object,
@@ -57,6 +68,27 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    }
+  },
+  watch:{
+    model:{
+      handler(){
+        this.validaLogica()
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  methods: {
+    validaLogica() {
+      this.oxigenoDomiciliario()
+    },
+    oxigenoDomiciliario(){
+      if(this.model.respuestas.oxigeno_domiciliario.model === 85) this.model.respuestas.plan_aprobado.show = true
+      else {
+        this.model.respuestas.plan_aprobado.show = false
+        this.model.respuestas.plan_aprobado.model = null
       }
     }
   }

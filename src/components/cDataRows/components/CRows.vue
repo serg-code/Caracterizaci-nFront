@@ -394,7 +394,6 @@ export default {
     },
   },
   data: () => ({
-    debounce: require('lodash/debounce'),
     urlStringExport: null,
     constDataRow: null,
     sortString: '',

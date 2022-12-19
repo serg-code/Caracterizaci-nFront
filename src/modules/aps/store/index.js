@@ -3,12 +3,13 @@ import Municipios from '@/modules/aps/data/Municipios'
 import Departamentos from '@/modules/aps/data/Departamentos'
 import Rhs from '@/modules/aps/data/Rhs'
 import EstadosCiviles from '@/modules/aps/data/EstadosCiviles'
+import Zonas from '@/modules/aps/data/Zonas'
 
 const state = {
     departamentos: Departamentos,
     municipios: Municipios,
     barrios: [],
-    zonas: [],
+    zonas: Zonas,
     preguntas: null,
     preguntasIntegrante: null,
     hogares: null,

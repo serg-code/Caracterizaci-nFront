@@ -108,6 +108,13 @@ export default {
     model: null,
   }),
   watch: {
+    model: {
+      handler() {
+        this.validaLogica()
+      },
+      immediate: false,
+      deep: true
+    },
     dialogModal: {
       handler(val) {
         if(val) this.assignIntegrante()
@@ -145,33 +152,19 @@ export default {
     },
     async guardarEncuesta() {
       this.loading = true
-      let dataEncuesta = this.clone(this.vmodel)
-      const copiaIntegrante = this.clone(this.model)
-      const indexIntegrante = dataEncuesta.integrantes.findIndex(x => x.id === copiaIntegrante.id)
-      if(indexIntegrante > -1) dataEncuesta.integrantes.splice(indexIntegrante, 1)
-      dataEncuesta.integrantes.splice(0, 0, copiaIntegrante)
-      dataEncuesta.encuesta = this.clone(dataEncuesta)
-      const dataIntegrante = this.clone(copiaIntegrante)
-
-      const response = await this.integranteSave({integrante: dataIntegrante, encuesta: dataEncuesta.encuesta})
-      if(response) this.vmodel = dataEncuesta.encuesta
+      const data = this.convertirDataIntegrante(this.clone(this.vmodel), this.clone(this.model))
+      const response = await this.integranteSave({integrante: data.dataIntegrante, encuesta: data.dataEncuesta.encuesta})
+      if(response) this.vmodel = data.dataEncuesta.encuesta
       this.loading = false
     },
     guardarEncuestaFull() {
       this.$refs.formEncuestaIntegrante.validate().then(async result => {
         if (result) {
           this.loading = true
-          let dataEncuesta = this.clone(this.vmodel)
-          const copiaIntegrante = this.clone(this.model)
-          const indexIntegrante = dataEncuesta.integrantes.findIndex(x => x.id === copiaIntegrante.id)
-          if(indexIntegrante > -1) dataEncuesta.integrantes.splice(indexIntegrante, 1)
-          dataEncuesta.integrantes.splice(0, 0, copiaIntegrante)
-          dataEncuesta.encuesta = this.clone(dataEncuesta)
-          const dataIntegrante = this.clone(copiaIntegrante)
-
-          const response = await this.integranteSaveFull({integrante: dataIntegrante, encuesta: dataEncuesta.encuesta})
+          const data = this.convertirDataIntegrante(this.clone(this.vmodel), this.clone(this.model))
+          const response = await this.integranteSaveFull({integrante: data.dataIntegrante, encuesta: data.dataEncuesta.encuesta})
           if(response) {
-            this.vmodel = dataEncuesta.encuesta
+            this.vmodel = data.dataEncuesta.encuesta
             this.cancelar()
           }
           this.loading = false
@@ -182,17 +175,10 @@ export default {
       this.$refs[seccion][0].validate().then(async result => {
         if (result) {
           this.loading = true
-          let dataEncuesta = this.clone(this.vmodel)
-          const copiaIntegrante = this.clone(this.model)
-          const indexIntegrante = dataEncuesta.integrantes.findIndex(x => x.id === copiaIntegrante.id)
-          if(indexIntegrante > -1) dataEncuesta.integrantes.splice(indexIntegrante, 1)
-          dataEncuesta.integrantes.splice(0, 0, copiaIntegrante)
-          dataEncuesta.encuesta = this.clone(dataEncuesta)
-          const dataIntegrante = this.clone(copiaIntegrante)
-
-          const response = await this.integranteSave({integrante: dataIntegrante, encuesta: dataEncuesta.encuesta})
+          const data = this.convertirDataIntegrante(this.clone(this.vmodel), this.clone(this.model))
+          const response = await this.integranteSave({integrante: data.dataIntegrante, encuesta: data.dataEncuesta.encuesta})
           if(response) {
-            this.vmodel = dataEncuesta.encuesta
+            this.vmodel = data.dataEncuesta.encuesta
             this.step++
           }
           this.loading = false

@@ -80,6 +80,16 @@
               />
             </v-col>
             <v-col cols="12" md="6">
+              <input-select
+                  v-model="model.sexo"
+                  :items="[{text: 'Masculino', value: 'Masculino'}, {text: 'Femenino', value: 'Femenino'}]"
+                  name="Sexo"
+                  label="Sexo"
+                  rules="required"
+                  no-radio
+              />
+            </v-col>
+            <v-col cols="12" md="6">
               <input-date
                   v-model="model.fecha_nacimiento"
                   name="Fecha de nacimiento"
@@ -157,7 +167,6 @@
 import Integrante from '@/modules/aps/models/Integrante'
 import APSMixin from '@/modules/aps/mixins/APSMixin'
 import {mapState} from 'vuex'
-import {uuid} from 'vue-uuid'
 export default {
   name: 'FormIntegrante',
   mixins: [APSMixin],
@@ -195,20 +204,21 @@ export default {
       this.$refs.formIntegrante.validate().then(async result => {
         if (result) {
           this.loading = true
-          let dataEncuesta = this.clone(this.value)
-          const copiaIntegrante = this.clone(this.model)
-          if(!copiaIntegrante.id) copiaIntegrante.id = uuid.v1()
-          copiaIntegrante.hogar_id = dataEncuesta.id
-          const indexIntegrante = dataEncuesta.integrantes.findIndex(x => x.id === copiaIntegrante.id)
-          if(indexIntegrante > -1) dataEncuesta.integrantes.splice(indexIntegrante, 1)
-          dataEncuesta.integrantes.splice(0, 0, copiaIntegrante)
-          dataEncuesta.encuesta = this.clone(dataEncuesta)
-          const dataIntegrante = this.clone(copiaIntegrante)
-          dataIntegrante.secciones = null
-          const response = await this.integranteSave({ encuesta: dataEncuesta.encuesta, integrante: dataIntegrante })
+          const data = this.convertirDataIntegrante(this.clone(this.value), this.clone(this.model))
+          // let dataEncuesta = this.clone(this.value)
+          // const copiaIntegrante = this.clone(this.model)
+          // if(!copiaIntegrante.id) copiaIntegrante.id = uuid.v1()
+          // copiaIntegrante.hogar_id = dataEncuesta.id
+          // const indexIntegrante = dataEncuesta.integrantes.findIndex(x => x.id === copiaIntegrante.id)
+          // if(indexIntegrante > -1) dataEncuesta.integrantes.splice(indexIntegrante, 1)
+          // dataEncuesta.integrantes.splice(0, 0, copiaIntegrante)
+          // dataEncuesta.encuesta = this.clone(dataEncuesta)
+          // const dataIntegrante = this.clone(copiaIntegrante)
+          data.dataIntegrante.secciones = null
+          const response = await this.integranteSave({ encuesta: data.dataEncuesta.encuesta, integrante: data.dataIntegrante })
           if(response) {
-            this.$emit('input', dataEncuesta.encuesta)
-            this.$emit('update:integrante', copiaIntegrante)
+            this.$emit('input', data.dataEncuesta.encuesta)
+            this.$emit('update:integrante', data.copiaIntegrante)
             this.cancelar()
           }
           this.loading = false

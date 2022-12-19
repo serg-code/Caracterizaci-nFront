@@ -59,15 +59,30 @@
         <input-pregunta
             :respuesta="model.respuestas.tension_sistolica"
             :pregunta="preguntasIntegrante.tension_sistolica"
+            sm="6"
+            md="6"
         />
         <input-pregunta
             :respuesta="model.respuestas.tension_diastolica"
             :pregunta="preguntasIntegrante.tension_diastolica"
+            sm="6"
+            md="6"
         />
+        <v-col v-if="tensionArterial" cols="12" class="pt-0">
+          <v-chip label :color="tensionArterial.color">
+            {{tensionArterial.message}}
+          </v-chip>
+        </v-col>
         <input-pregunta
             :respuesta="model.respuestas.hemoglobina_glococilada"
             :pregunta="preguntasIntegrante.hemoglobina_glococilada"
+            md="6"
         />
+        <v-col v-if="hemoglobina" cols="12" class="pt-0">
+          <v-chip label :color="hemoglobina.color">
+            {{hemoglobina.message}}
+          </v-chip>
+        </v-col>
         <input-pregunta
             :respuesta="model.respuestas.enfermedades_costosas"
             :pregunta="preguntasIntegrante.enfermedades_costosas"
@@ -98,6 +113,34 @@ export default {
       set(val) {
         this.$emit('input', val)
       }
+    },
+    hemoglobina(){
+      const valorHemoglobina = Number(this.model.respuestas.hemoglobina_glococilada.model)
+      if(valorHemoglobina && valorHemoglobina >= 7){
+        return { color: 'error', message: 'Hemoglobina no controlada' }
+      }
+      return null
+    },
+    tensionArterial(){
+      const sistolica = Number(this.model.respuestas.tension_sistolica.model)
+      const diastolica = Number(this.model.respuestas.tension_diastolica.model)
+      if(sistolica && diastolica) {
+        if((sistolica < 120) && (diastolica < 120)) {
+          return {color: 'success', message: 'Tensión arterial óptima'}
+        }else if((sistolica >= 120 && sistolica <= 129) && (diastolica >= 80 && diastolica <= 84)) {
+          return {color: 'success', message: 'Tensión arterial normal'}
+        }else if((sistolica >= 130 && sistolica <= 139) && (diastolica >= 85 && diastolica <= 90)) {
+          return {color: 'warning', message: 'Tensión arterial normal alta'}
+        }else if((sistolica >= 140 && sistolica <= 159) && (diastolica >= 90 && diastolica <= 99)) {
+          return {color: 'error', message: 'Hipertensión grado 1'}
+        }else if((sistolica >= 160 && sistolica <= 179) && (diastolica >= 100 && diastolica <= 109)) {
+          return {color: 'error', message: 'Hipertensión grado 2'}
+        }else if((sistolica >= 180) && (diastolica >= 110)) {
+          return {color: 'error', message: 'Hipertensión grado 3'}
+        }else if((sistolica >= 140) && (diastolica <= 90)) {
+          return {color: 'error', message: 'Hipertensión sistólica aislada'}
+        } else return {color: 'warning', message: 'Evaluación no disponible'}
+      } else return null
     }
   }
 }
