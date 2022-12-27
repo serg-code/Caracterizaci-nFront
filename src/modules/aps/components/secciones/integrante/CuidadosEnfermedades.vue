@@ -11,50 +11,74 @@
         <input-pregunta
             :respuesta="model.respuestas.cancer"
             :pregunta="preguntasIntegrante.cancer"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.artritis_remautidea"
             :pregunta="preguntasIntegrante.artritis_remautidea"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.vih_sida"
             :pregunta="preguntasIntegrante.vih_sida"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.hemofilia"
             :pregunta="preguntasIntegrante.hemofilia"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.insuficiencia_renal"
             :pregunta="preguntasIntegrante.insuficiencia_renal"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.fuma"
             :pregunta="preguntasIntegrante.fuma"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.actividad_fisica"
             :pregunta="preguntasIntegrante.actividad_fisica"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.vacuna_fiebre_amarilla"
             :pregunta="preguntasIntegrante.vacuna_fiebre_amarilla"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.enfermedades_cronicas"
             :pregunta="preguntasIntegrante.enfermedades_cronicas"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.diabetes"
             :pregunta="preguntasIntegrante.diabetes"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.hipertencion_trimestral"
             :pregunta="preguntasIntegrante.hipertencion_trimestral"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.diabetes_trimestral"
             :pregunta="preguntasIntegrante.diabetes_trimestral"
+            sm="6"
+            md="4"
         />
         <input-pregunta
             :respuesta="model.respuestas.tension_sistolica"

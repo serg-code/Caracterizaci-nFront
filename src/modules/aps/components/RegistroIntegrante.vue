@@ -79,13 +79,29 @@
 import APSMixin from '@/modules/aps/mixins/APSMixin'
 import Integrante from '@/modules/aps/models/Integrante'
 import FormIntegrante from '@/modules/aps/components/FormIntegrante'
+
 import IntegranteAccidentes from '@/modules/aps/components/secciones/integrante/IntegranteAccidentes'
 import CuidadosDomiciliarios from '@/modules/aps/components/secciones/integrante/CuidadosDomiciliarios'
 import CuidadosEnfermedades from '@/modules/aps/components/secciones/integrante/CuidadosEnfermedades'
+import IdentificacionCiudadana from '@/modules/aps/components/secciones/integrante/IdentificacionCiudadana'
+import SaludMental from '@/modules/aps/components/secciones/integrante/SaludMental'
+import EnfermedadesSaludPublica from '@/modules/aps/components/secciones/integrante/EnfermedadesSaludPublica'
+import IntegranteMorbilidad from '@/modules/aps/components/secciones/integrante/IntegranteMorbilidad'
+
 import NavegacionEncuesta from '@/modules/aps/components/NavegacionEncuesta'
 export default {
   name: 'RegistroIntegrante',
-  components: {FormIntegrante, NavegacionEncuesta, IntegranteAccidentes, CuidadosDomiciliarios, CuidadosEnfermedades},
+  components: {
+    FormIntegrante,
+    NavegacionEncuesta,
+    IntegranteAccidentes,
+    CuidadosDomiciliarios,
+    CuidadosEnfermedades,
+    IdentificacionCiudadana,
+    SaludMental,
+    EnfermedadesSaludPublica,
+    IntegranteMorbilidad
+  },
   mixins: [APSMixin],
   props: {
     value:{

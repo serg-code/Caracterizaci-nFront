@@ -81,9 +81,11 @@
 
 <script>
 import RegistroIntegrante from '@/modules/aps/components/RegistroIntegrante'
+import APSMixin from '@/modules/aps/mixins/APSMixin'
 export default {
   name: 'IntegrantesList',
   components: {RegistroIntegrante},
+  mixins: [APSMixin],
   props:{
     value: {
       type: Object,
@@ -123,9 +125,19 @@ export default {
       this.itemSelected = item
       this.showConfirm = true
     },
-    borrarIntegrante(val){
-      console.log('ok borrar', val)
+    async borrarIntegrante(){
       this.loadingConfirm = true
+      const dataEncuesta = this.clone(this.model)
+      const index = dataEncuesta.integrantes.findIndex(x => x.id === this.itemSelected.id)
+      if(index > -1) dataEncuesta.integrantes.splice(index, 1)
+      dataEncuesta.encuesta = this.clone(dataEncuesta)
+      const response = await this.integranteDelete(this.itemSelected.id)
+      if(response) {
+        this.showConfirm = false
+        this.itemSelected = null
+        this.model = dataEncuesta
+      }
+      this.loadingConfirm = false
     }
   }
 }

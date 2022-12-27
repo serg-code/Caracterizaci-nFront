@@ -1,6 +1,10 @@
 import Accidentes from "@/modules/aps/models/integrante/Accidentes";
 import CuidadosDomiciliarios from "@/modules/aps/models/integrante/CuidadosDomiciliarios";
 import CuidadosEnfermedades from "@/modules/aps/models/integrante/CuidadosEnfermedades";
+import IdentificacionCiudadana from "@/modules/aps/models/integrante/IdentificacionCiudadana";
+import SaludMental from "@/modules/aps/models/integrante/SaludMental";
+import EnfermedadesSaludPublica from "@/modules/aps/models/integrante/EnfermedadesSaludPublica";
+import Morbilidad from "@/modules/aps/models/integrante/Morbilidad";
 
 const Integrante = {
     id: null,
@@ -22,9 +26,13 @@ const Integrante = {
     puntaje_max: 0,
     estado_registro: 'ABIERTO',
     secciones: {
+        identificacion_ciudadana: IdentificacionCiudadana,
+        cuidado_enfermedades: CuidadosEnfermedades,
         accidentes: Accidentes,
         cuidados_domiciliarios: CuidadosDomiciliarios,
-        cuidado_enfermedades: CuidadosEnfermedades
+        salud_mental: SaludMental,
+        enfermedades_salud_publica: EnfermedadesSaludPublica,
+        morbilidad: Morbilidad
     },
 }
 

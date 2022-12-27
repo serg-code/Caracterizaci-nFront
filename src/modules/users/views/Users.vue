@@ -5,7 +5,7 @@
         <c-tooltip tooltip="Nueva encuesta" top>
           <v-btn
               color="primary"
-              @click="register()"
+              @click="register(null)"
           >
             <v-icon class="white--text">mdi-plus</v-icon>
             Usuario
@@ -31,11 +31,23 @@
                 hide-default-footer
                 disable-pagination
             >
+              <template v-slot:item.name="{ item }">
+                <div style="display: grid;">
+                  <span class="font-weight-bold">{{ item.name }}</span>
+                  <span>{{ [item.tipo_identificacion, item.identificacion].filter(x => x).join('') }}</span>
+                </div>
+              </template>
+              <template v-slot:item.email="{ item }">
+                <div style="display: grid;">
+                  <span>{{ item.email }}</span>
+                  <span>{{ item.telefono }}</span>
+                </div>
+              </template>
               <template v-slot:item.options="{ item }">
                 <options-buttons
                     :loading="item.loading"
                     edit-button
-                    @edit="$router.push(`/aps/registro-encuesta/${item.id}`)"
+                    @edit="register(item)"
                     top
                 />
               </template>
@@ -46,7 +58,7 @@
     </v-row>
     <register-user
         v-model="registerDialog"
-        :user="selectedItem"
+        :user-prop="selectedItem"
         @saved="rowsReload"
     />
   </v-container>
@@ -64,8 +76,8 @@ export default {
         value: 'name',
       },
       {
-        text: 'Correo electrónico',
-        value: 'Email',
+        text: 'Contacto',
+        value: 'email',
       },
       {
         value: 'options',

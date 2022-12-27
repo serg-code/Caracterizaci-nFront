@@ -2,7 +2,7 @@ export default [
   {
     name: 'rowsUsers',
     filters: '',
-    changes: 1,
+    changes: 2,
     version: 1,
     headers: [],
   },

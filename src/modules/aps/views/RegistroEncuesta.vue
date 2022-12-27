@@ -55,18 +55,26 @@
 </template>
 
 <script>
+import Hogar from '@/modules/aps/models/Hogar'
+import FormHogar from '@/modules/aps/components/FormHogar'
+import ViviendaHogar from '@/modules/aps/components/secciones/ViviendaHogar'
 import FactoresProtectores from '@/modules/aps/components/secciones/FactoresProtectores'
 import HabitosConsumo from '@/modules/aps/components/secciones/HabitosConsumo'
-import Hogar from '@/modules/aps/models/Hogar'
 import NavegacionEncuesta from '@/modules/aps/components/NavegacionEncuesta'
-import FormHogar from '@/modules/aps/components/FormHogar'
 import IntegrantesList from '@/modules/aps/components/IntegrantesList'
 import APSMixin from '@/modules/aps/mixins/APSMixin'
 
 export default {
   name: 'RegistroEncuesta',
   mixins:[APSMixin],
-  components: {IntegrantesList, FormHogar, NavegacionEncuesta, FactoresProtectores, HabitosConsumo},
+  components: {
+    FormHogar,
+    ViviendaHogar,
+    FactoresProtectores,
+    HabitosConsumo,
+    NavegacionEncuesta,
+    IntegrantesList
+  },
   props: {
     uuid: {
       type: String,

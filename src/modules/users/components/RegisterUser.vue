@@ -20,6 +20,27 @@
         <v-card-text class="mt-4">
           <v-row>
             <v-col cols="12">
+              <input-select
+                  v-model="model.tipo_identificacion"
+                  :items="tiposIdentificacion"
+                  item-text="tipo"
+                  item-value="id"
+                  name="Tipo identificación"
+                  label="Tipo identificación"
+                  rules="required"
+                  no-radio
+              />
+            </v-col>
+            <v-col cols="12">
+              <input-text
+                  v-model="model.identificacion"
+                  label="Identificación"
+                  name="Identificación"
+                  rules="required"
+                  type="number"
+              />
+            </v-col>
+            <v-col cols="12">
               <input-text
                   v-model="model.name"
                   label="Nombre"
@@ -37,6 +58,49 @@
               />
             </v-col>
             <v-col cols="12">
+              <input-text
+                  v-model="model.telefono"
+                  label="Celular"
+                  name="Celular"
+                  type="tel"
+                  rules="required"
+              />
+            </v-col>
+            <v-col cols="12">
+              <input-select
+                  v-model="model.roles"
+                  :items="roles"
+                  item-text="name"
+                  item-value="id"
+                  name="Roles"
+                  label="Roles"
+                  rules="required"
+                  multiple
+                  chips
+                  small-chips
+                  deletable-chips
+                  no-radio
+              />
+            </v-col>
+            <template v-if="!model.id">
+              <v-col cols="12">
+                <input-password
+                    v-model="model.password"
+                    label="Contraseña"
+                    rules="required"
+                    name="contraseña"
+                />
+              </v-col>
+              <v-col cols="12">
+                <input-password
+                    v-model="model.passwordConfirmation"
+                    label="Confirmación de contraseña"
+                    rules="required|confirmed:contraseña"
+                    name="Confirmación de contraseña"
+                />
+              </v-col>
+            </template>
+            <v-col cols="12">
               <input-select
                   v-model="model.activo"
                   :items="[{text: 'Activo', value: 1}, {text: 'Inactivo', value: 0}]"
@@ -53,6 +117,7 @@
 </template>
 
 <script>
+import TiposIdentificacion from '@/modules/users/data/TiposIdentificacion'
 export default {
   name: 'RegisterUser',
   props: {
@@ -60,12 +125,14 @@ export default {
       type: Boolean,
       default: false,
     },
-    user: {
+    userProp: {
       type: Object,
       default: null,
     },
   },
   data:() => ({
+    tiposIdentificacion:  TiposIdentificacion,
+    loadingRoles: false,
     loading: false,
     makeModel: {
       id: null,
@@ -73,6 +140,7 @@ export default {
       email: null,
       name: null,
       password: null,
+      passwordConfirmation: null,
       roles: [],
     },
     model: null,
@@ -88,22 +156,40 @@ export default {
       },
     }
   },
-  created() {
-    this.getData()
+  watch: {
+    dialog:{
+      handler(val){
+        if(val) this.getData()
+      },
+      immediate: false
+    }
   },
   methods: {
-    getData() {
-      if (!this.user?.id) {
+    getData(){
+      this.getUser()
+      this.getRoles()
+    },
+    getUser() {
+      if (!this.userProp?.id) {
         this.model = this.makeModel
       } else {
         this.loading = true
-        this.axios.get(`usuarios/${this.user.id}`)
+        this.axios.get(`usuarios/${this.userProp.id}`)
             .then(({ data }) => {
-              this.model = { ...this.makeModel, ...(data || {}) }
+              this.model = { ...this.makeModel, ...(data?.data?.usuario || {}) }
             })
             .catch(error => this.$store.commit('snackbar/setError', { error }))
             .finally(() => { this.loading = false })
       }
+    },
+    getRoles() {
+      this.loadingRoles = true
+      this.axios.get('roles')
+          .then(({ data }) => {
+            this.roles = data?.data[0] || []
+          })
+          .catch(error => this.$store.commit('snackbar/setError', { error }))
+          .finally(() => { this.loadingRoles = false })
     },
     save(valid){
       if (valid) {
@@ -113,7 +199,7 @@ export default {
             .then(() => {
               this.$store.commit('snackbar/set', { message: `El usuario se ${this.model.id ? 'actualizó' : 'creó'} correctamente.` })
               this.$emit('saved')
-              close()
+              this.close()
             })
             .catch(error => this.$store.commit('snackbar/setError', { error }))
             .finally(() => { this.loading = false })

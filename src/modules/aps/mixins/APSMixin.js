@@ -24,6 +24,19 @@ export default {
                     })
             })
         },
+        async integranteDelete(id) {
+            return await new Promise(resolve => {
+                this.axios.delete(`integrante/${id}`)
+                    .then(({data}) => {
+                        console.log('data', data)
+                        resolve(true)
+                    })
+                    .catch(error => {
+                        this.$store.commit('snackbar/setError', {error})
+                        resolve(false)
+                    })
+            })
+        },
         async encuestaSave(encuesta) {
             return await new Promise(resolve => {
                 encuesta.hogar.secciones = encuesta.hogar.secciones ? this.convertirSecciones(encuesta.hogar.secciones) : []

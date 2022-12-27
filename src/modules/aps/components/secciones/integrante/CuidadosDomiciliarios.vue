@@ -50,7 +50,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
-import SearchCie10 from "@/modules/aps/components/input/SearchCie10";
+import SearchCie10 from '@/modules/aps/components/input/SearchCie10'
 export default {
   name: 'CuidadosDomiciliarios',
   components: {SearchCie10, InputPregunta},
@@ -83,6 +83,25 @@ export default {
   methods: {
     validaLogica() {
       this.oxigenoDomiciliario()
+      this.cuidadosDomiciliarios()
+    },
+    cuidadosDomiciliarios(){
+      if(this.model.respuestas.cuidados_domiciliarios.model === 78) {
+        this.model.respuestas.diagnostico_principal.show = true
+        this.model.respuestas.causa.show = true
+        this.model.respuestas.fecha_inicio_domiciliario.show = true
+        this.model.respuestas.oxigeno_domiciliario.show = true
+      }
+      else {
+        this.model.respuestas.diagnostico_principal.show = false
+        this.model.respuestas.diagnostico_principal.model = null
+      this.model.respuestas.causa.show = false
+      this.model.respuestas.causa.model = null
+        this.model.respuestas.fecha_inicio_domiciliario.show = false
+        this.model.respuestas.fecha_inicio_domiciliario.model = null
+        this.model.respuestas.oxigeno_domiciliario.show = false
+        this.model.respuestas.oxigeno_domiciliario.model = null
+      }
     },
     oxigenoDomiciliario(){
       if(this.model.respuestas.oxigeno_domiciliario.model === 85) this.model.respuestas.plan_aprobado.show = true
