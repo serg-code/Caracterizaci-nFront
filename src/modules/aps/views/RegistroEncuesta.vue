@@ -58,8 +58,11 @@
 import Hogar from '@/modules/aps/models/Hogar'
 import FormHogar from '@/modules/aps/components/FormHogar'
 import ViviendaHogar from '@/modules/aps/components/secciones/ViviendaHogar'
+import AnimalesHogar from '@/modules/aps/components/secciones/AnimalesHogar'
 import FactoresProtectores from '@/modules/aps/components/secciones/FactoresProtectores'
 import HabitosConsumo from '@/modules/aps/components/secciones/HabitosConsumo'
+import SeguridadAlimentaria from '@/modules/aps/components/secciones/SeguridadAlimentaria'
+import MortalidadHogar from '@/modules/aps/components/secciones/MortalidadHogar'
 import NavegacionEncuesta from '@/modules/aps/components/NavegacionEncuesta'
 import IntegrantesList from '@/modules/aps/components/IntegrantesList'
 import APSMixin from '@/modules/aps/mixins/APSMixin'
@@ -70,8 +73,11 @@ export default {
   components: {
     FormHogar,
     ViviendaHogar,
+    AnimalesHogar,
     FactoresProtectores,
     HabitosConsumo,
+    SeguridadAlimentaria,
+    MortalidadHogar,
     NavegacionEncuesta,
     IntegrantesList
   },
@@ -143,6 +149,7 @@ export default {
           const copia = this.clone(this.model)
           const response = await this.encuestaSave({hogar: copia})
           if(response) this.step++
+          // this.step++
           this.loading = false
         }
         else {

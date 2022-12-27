@@ -28,6 +28,7 @@ const Vivienda = {
         tipos_insectos_vectores: PropsRespuesta,
         conservacion_alimentos: PropsRespuesta,
         actividad_productiva: PropsRespuesta,
+        ciuu: PropsRespuesta,
         tipos_material_piso: PropsRespuesta,
         tipos_material_techo: PropsRespuesta,
         tipos_material_paredes: PropsRespuesta,

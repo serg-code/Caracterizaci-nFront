@@ -1,9 +1,9 @@
 import FactoresProtectores from '@/modules/aps/models/FactoresProtectores'
 import HabitosConsumo from '@/modules/aps/models/HabitosConsumo'
 import Vivienda from '@/modules/aps/models/Vivienda'
-// import Animales from '@/modules/aps/models/Animales'
-// import SeguridadAlimentaria from '@/modules/aps/models/SeguridadAlimentaria'
-// import Mortalidad from '@/modules/aps/models/Mortalidad'
+import Animales from '@/modules/aps/models/Animales'
+import SeguridadAlimentaria from '@/modules/aps/models/SeguridadAlimentaria'
+import Mortalidad from '@/modules/aps/models/Mortalidad'
 
 const Hogar = {
     id: null,
@@ -22,11 +22,11 @@ const Hogar = {
     estado_registro: 'ABIERTO',
     secciones: {
         vivienda: Vivienda,
-        // animales: Animales,
+        animales: Animales,
         factores_protectores: FactoresProtectores,
         habitos_consumo: HabitosConsumo,
-        // seguridad_alimentaria: SeguridadAlimentaria,
-        // mortalidad: Mortalidad,
+        seguridad_alimentaria: SeguridadAlimentaria,
+        mortalidad: Mortalidad,
     },
     integrantes:[]
 }

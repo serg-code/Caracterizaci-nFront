@@ -110,6 +110,17 @@
             :respuesta="model.respuestas.actividad_productiva"
             :pregunta="preguntas.actividad_productiva"
         />
+        <v-col
+            v-if="model.respuestas.ciuu.show"
+            cols="12"
+        >
+          <search-ciuu
+              v-model="model.respuestas.ciuu.model"
+              :name="preguntas.ciuu.descripcion"
+              :label="preguntas.ciuu.descripcion"
+              rules="required"
+          />
+        </v-col>
         <input-pregunta
             :respuesta="model.respuestas.tipos_material_piso"
             :pregunta="preguntas.tipos_material_piso"
@@ -130,9 +141,10 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import SearchCiuu from '@/modules/aps/components/input/SearchCiuu'
 export default {
   name: 'ViviendaHogar',
-  components: {InputPregunta},
+  components: {InputPregunta, SearchCiuu},
   props: {
     seccion: {
       type:Object,
@@ -147,6 +159,51 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    }
+  },
+  watch:{
+    model:{
+      handler(){
+        this.validaLogica()
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  methods: {
+    validaLogica() {
+      this.encuestaSisben()
+      this.actividadProductiva()
+      this.tratamientoAgua()
+    },
+    tratamientoAgua(){
+      if(this.model.respuestas.tratamiento_agua.model === 273) this.model.respuestas.tipos_tratamiento_agua.show = true
+      else {
+        this.model.respuestas.tipos_tratamiento_agua.show = false
+        this.model.respuestas.tipos_tratamiento_agua.model = null
+      }
+    },
+    actividadProductiva(){
+      if(this.model.respuestas.actividad_productiva.model === 298) this.model.respuestas.ciuu.show = true
+      else {
+        this.model.respuestas.ciuu.show = false
+        this.model.respuestas.ciuu.model = null
+      }
+    },
+    encuestaSisben(){
+      if(this.model.respuestas.encuesta_sisben.model === 233) {
+        this.model.respuestas.ficha_sisben.show = true
+        this.model.respuestas.puntaje_sisben.show = true
+        this.model.respuestas.nivel_sisben.show = true
+      }
+      else {
+        this.model.respuestas.ficha_sisben.show = false
+        this.model.respuestas.ficha_sisben.model = null
+        this.model.respuestas.puntaje_sisben.show = false
+        this.model.respuestas.puntaje_sisben.model = null
+        this.model.respuestas.nivel_sisben.show = false
+        this.model.respuestas.nivel_sisben.model = null
       }
     }
   }
