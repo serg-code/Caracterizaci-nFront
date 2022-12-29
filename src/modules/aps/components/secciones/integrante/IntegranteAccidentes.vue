@@ -28,6 +28,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import { integrante } from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'IntegranteAccidentes',
   components: {InputPregunta},
@@ -62,7 +63,7 @@ export default {
       this.accidentesTransito()
     },
     accidentesTransito(){
-      if(this.model.respuestas.accidentes_transito.model === 69) this.model.respuestas.tipo_lesion.show = true
+      if(this.model.respuestas.accidentes_transito.model === integrante.accidentes_transito) this.model.respuestas.tipo_lesion.show = true
       else {
         this.model.respuestas.tipo_lesion.show = false
         this.model.respuestas.tipo_lesion.model = null

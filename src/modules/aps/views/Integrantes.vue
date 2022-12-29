@@ -1,23 +1,11 @@
 <template>
   <v-container>
-    <view-title>
-      <template v-slot:action>
-        <c-tooltip tooltip="Nueva encuesta" top>
-          <v-btn
-              color="primary"
-              :to="{name: 'RegistroEncuestaAPS'}"
-          >
-            <v-icon class="white--text">mdi-plus</v-icon>
-            Encuesta
-          </v-btn>
-        </c-tooltip>
-      </template>
-    </view-title>
+    <view-title />
     <v-row>
       <v-col cols="12">
         <c-rows
-            name="rowsEncuestas"
-            route="hogar"
+            name="rowsIntegrantes"
+            route="integrante"
             :make-headers="itemsHeaders"
             :initial-run="true"
         >
@@ -32,15 +20,28 @@
                 disable-pagination
             >
               <template v-slot:item.id="{ item }">
-                <div style="display: grid;">
-                  <span class="font-weight-bold">{{ item.id }}</span>
-                  <span>{{ item.direccion }}</span>
+                <div style="display: flex;">
+                  <v-badge
+                      :disabled="!item.cabeza_familia"
+                      color="success"
+                      icon="mdi-shield-check"
+                      overlap
+                      offset-y="22"
+                      bottom
+                      left
+                  >
+                    <v-icon large class="mr-2">mdi-face-{{item.sexo === 'Masculino' ? 'man' : 'woman'}}</v-icon>
+                  </v-badge>
+                  <div style="display: grid;">
+                    <span class="font-weight-bold">{{ [item.primer_nombre, item.segundo_nombre, item.primer_apellido, item.segundo_apellido].filter(x => x).join(' ') }}</span>
+                    <span>{{ [item.tipo_identificacion, item.identificacion].filter(x => x).join('') }}</span>
+                  </div>
                 </div>
               </template>
-              <template v-slot:item.ubicacion="{ item }">
+              <template v-slot:item.contacto="{ item }">
                 <div style="display: grid;">
-                  <span>{{ item.municipio }}</span>
-                  <span>{{ item.departamento }}</span>
+                  <span>{{ item.correo }}</span>
+                  <span>{{ item.telefono }}</span>
                 </div>
               </template>
               <template v-slot:item.puntaje_obtenido="{ item }">
@@ -62,24 +63,21 @@
               <template v-slot:item.options="{ item }">
                 <options-buttons
                     :loading="item.loading"
-                    edit-button
-                    @edit="$router.push(`/aps/registro-encuesta/${item.id}`)"
-                    top
                 >
                   <c-tooltip
                       top
-                      tooltip="Ir a los resultados"
+                      tooltip="Ir a la encuesta"
                   >
                     <v-btn
                         class="ma-1"
-                        color="success"
+                        color="warning"
                         depressed
                         fab
                         dark
                         x-small
-                        @click="$router.push(`/aps/resultado-encuesta/${item.id}`)"
+                        @click="$router.push(`/aps/registro-encuesta/${item.hogar_id}`)"
                     >
-                      <v-icon>mdi-gauge</v-icon>
+                      <v-icon>mdi-clipboard-list</v-icon>
                     </v-btn>
                   </c-tooltip>
                 </options-buttons>
@@ -94,16 +92,16 @@
 
 <script>
 export default {
-  name: 'ListEncuestas',
+  name: 'ListIntegrantes',
   data:() => ({
     itemsHeaders: [
       {
-        text: 'Encuesta',
+        text: 'Integrante',
         value: 'id',
       },
       {
-        text: 'Ubicación',
-        value: 'ubicacion',
+        text: 'Contacto',
+        value: 'contacto',
       },
       {
         text: 'Riesgo',

@@ -10,7 +10,14 @@ export default [
     name: 'rowsEncuestas',
     filters: '',
     changes: 1,
-    version: 2,
+    version: 3,
+    headers: [],
+  },
+  {
+    name: 'rowsIntegrantes',
+    filters: '',
+    changes: 1,
+    version: 1,
     headers: [],
   }
 ]

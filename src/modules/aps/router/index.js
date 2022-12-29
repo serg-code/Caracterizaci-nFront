@@ -4,6 +4,16 @@ export default {
     component: () => import('@/layouts/default/Layout'),
     children: [
         {
+            name: 'IntegrantesAPS',
+            path: 'integrantes',
+            component: () => import('@/modules/aps/views/Integrantes.vue'),
+            meta: {
+                requiresAuth: true,
+                title: 'Encuestados APS',
+                footer: true
+            }
+        },
+        {
             name: 'EncuestasAPS',
             path: 'encuestas',
             component: () => import('@/modules/aps/views/Encuestas.vue'),

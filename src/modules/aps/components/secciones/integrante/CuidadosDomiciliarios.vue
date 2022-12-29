@@ -48,21 +48,23 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import {mapState} from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
 import SearchCie10 from '@/modules/aps/components/input/SearchCie10'
+import {integrante} from '@/modules/aps/data/CondicionalesId'
+
 export default {
   name: 'CuidadosDomiciliarios',
   components: {SearchCie10, InputPregunta},
   props: {
     seccion: {
-      type:Object,
+      type: Object,
       default: null
     }
   },
   computed: {
-    ...mapState('aps',['preguntasIntegrante']),
-    model:{
+    ...mapState('aps', ['preguntasIntegrante']),
+    model: {
       get() {
         return this.seccion
       },
@@ -71,9 +73,9 @@ export default {
       }
     }
   },
-  watch:{
-    model:{
-      handler(){
+  watch: {
+    model: {
+      handler() {
         this.validaLogica()
       },
       immediate: true,
@@ -85,26 +87,25 @@ export default {
       this.oxigenoDomiciliario()
       this.cuidadosDomiciliarios()
     },
-    cuidadosDomiciliarios(){
-      if(this.model.respuestas.cuidados_domiciliarios.model === 78) {
+    cuidadosDomiciliarios() {
+      if (this.model.respuestas.cuidados_domiciliarios.model === integrante.cuidados_domiciliarios) {
         this.model.respuestas.diagnostico_principal.show = true
         this.model.respuestas.causa.show = true
         this.model.respuestas.fecha_inicio_domiciliario.show = true
         this.model.respuestas.oxigeno_domiciliario.show = true
-      }
-      else {
+      } else {
         this.model.respuestas.diagnostico_principal.show = false
         this.model.respuestas.diagnostico_principal.model = null
-      this.model.respuestas.causa.show = false
-      this.model.respuestas.causa.model = null
+        this.model.respuestas.causa.show = false
+        this.model.respuestas.causa.model = null
         this.model.respuestas.fecha_inicio_domiciliario.show = false
         this.model.respuestas.fecha_inicio_domiciliario.model = null
         this.model.respuestas.oxigeno_domiciliario.show = false
         this.model.respuestas.oxigeno_domiciliario.model = null
       }
     },
-    oxigenoDomiciliario(){
-      if(this.model.respuestas.oxigeno_domiciliario.model === 85) this.model.respuestas.plan_aprobado.show = true
+    oxigenoDomiciliario() {
+      if (this.model.respuestas.oxigeno_domiciliario.model === integrante.oxigeno_domiciliario) this.model.respuestas.plan_aprobado.show = true
       else {
         this.model.respuestas.plan_aprobado.show = false
         this.model.respuestas.plan_aprobado.model = null

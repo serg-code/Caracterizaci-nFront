@@ -6,6 +6,7 @@ export default new VuexPersistence({
     modules: [
         'auth',
         'settings',
-        'aps'
+        'aps',
+        'dataRows'
     ]
 })

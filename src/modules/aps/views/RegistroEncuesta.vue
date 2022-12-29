@@ -146,10 +146,10 @@ export default {
         if (result) {
           this.loading = true
           this.model.encuesta = this.clone(this.model)
-          const copia = this.clone(this.model)
-          const response = await this.encuestaSave({hogar: copia})
-          if(response) this.step++
-          // this.step++
+          // const copia = this.clone(this.model)
+          // const response = await this.encuestaSave({hogar: copia})
+          // if(response) this.step++
+          this.step++
           this.loading = false
         }
         else {

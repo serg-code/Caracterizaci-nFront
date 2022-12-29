@@ -142,6 +142,8 @@
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
 import SearchCiuu from '@/modules/aps/components/input/SearchCiuu'
+import { hogar } from '@/modules/aps/data/CondicionalesId'
+
 export default {
   name: 'ViviendaHogar',
   components: {InputPregunta, SearchCiuu},
@@ -178,21 +180,21 @@ export default {
       this.tratamientoAgua()
     },
     tratamientoAgua(){
-      if(this.model.respuestas.tratamiento_agua.model === 273) this.model.respuestas.tipos_tratamiento_agua.show = true
+      if(this.model.respuestas.tratamiento_agua.model === hogar.tratamiento_agua) this.model.respuestas.tipos_tratamiento_agua.show = true
       else {
         this.model.respuestas.tipos_tratamiento_agua.show = false
         this.model.respuestas.tipos_tratamiento_agua.model = null
       }
     },
     actividadProductiva(){
-      if(this.model.respuestas.actividad_productiva.model === 298) this.model.respuestas.ciuu.show = true
+      if(this.model.respuestas.actividad_productiva.model === hogar.actividad_productiva) this.model.respuestas.ciuu.show = true
       else {
         this.model.respuestas.ciuu.show = false
         this.model.respuestas.ciuu.model = null
       }
     },
     encuestaSisben(){
-      if(this.model.respuestas.encuesta_sisben.model === 233) {
+      if(this.model.respuestas.encuesta_sisben.model === hogar.encuesta_sisben) {
         this.model.respuestas.ficha_sisben.show = true
         this.model.respuestas.puntaje_sisben.show = true
         this.model.respuestas.nivel_sisben.show = true

@@ -40,6 +40,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import {integrante} from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'IntegranteMorbilidad',
   components: {InputPregunta},
@@ -57,6 +58,32 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    }
+  },
+  watch:{
+    model:{
+      handler(){
+        this.validaLogica()
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  methods: {
+    validaLogica() {
+      this.enfermedadCronica()
+    },
+    enfermedadCronica(){
+      if(this.model.respuestas.enfermedad_cronica.model === integrante.enfermedad_cronica) {
+        this.model.respuestas.enfermedad_cronica_cual.show = true
+        this.model.respuestas.controlada.show = true
+      }
+      else {
+        this.model.respuestas.enfermedad_cronica_cual.show = false
+        this.model.respuestas.enfermedad_cronica_cual.model = null
+        this.model.respuestas.controlada.show = false
+        this.model.respuestas.controlada.model = null
       }
     }
   }

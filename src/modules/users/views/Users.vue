@@ -2,7 +2,7 @@
   <v-container>
     <view-title>
       <template v-slot:action>
-        <c-tooltip tooltip="Nueva encuesta" top>
+        <c-tooltip tooltip="Nuevo usuario" top>
           <v-btn
               color="primary"
               @click="register(null)"

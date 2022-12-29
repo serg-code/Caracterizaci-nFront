@@ -36,6 +36,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import { hogar } from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'MortalidadHogar',
   components: {InputPregunta},
@@ -53,6 +54,38 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    }
+  },
+  watch:{
+    model:{
+      handler(){
+        this.validaLogica()
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  methods: {
+    validaLogica() {
+      this.fallecidoFamiliar()
+    },
+    fallecidoFamiliar(){
+      if(this.model.respuestas.fallecido_familiar.model === hogar.fallecido_familiar) {
+        this.model.respuestas.sexo_fallecido.show = true
+        this.model.respuestas.edad_fallecido.show = true
+        this.model.respuestas.causa_muerte.show = true
+        this.model.respuestas.fecha_muerte.show = true
+      }
+      else {
+        this.model.respuestas.sexo_fallecido.show = false
+        this.model.respuestas.sexo_fallecido.model = null
+        this.model.respuestas.edad_fallecido.show = false
+        this.model.respuestas.edad_fallecido.model = null
+        this.model.respuestas.causa_muerte.show = false
+        this.model.respuestas.causa_muerte.model = null
+        this.model.respuestas.fecha_muerte.show = false
+        this.model.respuestas.fecha_muerte.model = null
       }
     }
   }

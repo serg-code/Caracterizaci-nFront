@@ -22,7 +22,7 @@
           <v-list-item-content>
             <v-list-item-title class="text-h4"> {{ title || routeMeta.title }}</v-list-item-title>
             <v-list-item-subtitle class="subtitle-1 font-weight-medium">
-              {{ subtitle || routeMeta.subtitle }}
+              <slot name="subtitle">{{ subtitle || routeMeta.subtitle }}</slot>
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>

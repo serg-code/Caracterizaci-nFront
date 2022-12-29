@@ -56,6 +56,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import { integrante } from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'IdentificacionCiudadana',
   components: {InputPregunta},
@@ -92,21 +93,21 @@ export default {
       this.discapacidad()
     },
     discapacidad(){
-      if(this.model.respuestas.discapacidad.model && this.model.respuestas.discapacidad.model !== 207) this.model.respuestas.ayudas_tenicas.show = true
+      if(this.model.respuestas.discapacidad.model && this.model.respuestas.discapacidad.model !== integrante.discapacidad) this.model.respuestas.ayudas_tenicas.show = true
       else {
         this.model.respuestas.ayudas_tenicas.show = false
         this.model.respuestas.ayudas_tenicas.model = null
       }
     },
     estaEstudiando(){
-      if(this.model.respuestas.esta_estudiando.model === 192) this.model.respuestas.por_que.show = true
+      if(this.model.respuestas.esta_estudiando.model === integrante.esta_estudiando) this.model.respuestas.por_que.show = true
       else {
         this.model.respuestas.por_que.show = false
         this.model.respuestas.por_que.model = null
       }
     },
     programas(){
-      if(this.model.respuestas.programas.model === 176) this.model.respuestas.cual_programa.show = true
+      if(this.model.respuestas.programas.model === integrante.programas) this.model.respuestas.cual_programa.show = true
       else {
         this.model.respuestas.cual_programa.show = false
         this.model.respuestas.cual_programa.model = null

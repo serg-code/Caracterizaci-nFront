@@ -160,6 +160,7 @@
         </v-container>
       </ValidationObserver>
     </template>
+    <global-loading :value="loading" absolute/>
   </v-card>
 </template>
 

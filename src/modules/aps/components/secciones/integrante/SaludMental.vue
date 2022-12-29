@@ -11,30 +11,51 @@
         <input-pregunta
             :respuesta="model.respuestas.depresion"
             :pregunta="preguntasIntegrante.depresion"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.intento_suicidio"
             :pregunta="preguntasIntegrante.intento_suicidio"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.esquizofrenia"
             :pregunta="preguntasIntegrante.esquizofrenia"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.trastorno_afectivo"
             :pregunta="preguntasIntegrante.trastorno_afectivo"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.bulimia"
             :pregunta="preguntasIntegrante.bulimia"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.anorexia"
             :pregunta="preguntasIntegrante.anorexia"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.tratamiento"
             :pregunta="preguntasIntegrante.tratamiento"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.diagnostico"
@@ -43,28 +64,44 @@
         <input-pregunta
             :respuesta="model.respuestas.violencia_fisica"
             :pregunta="preguntasIntegrante.violencia_fisica"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.violencia_psicologica"
             :pregunta="preguntasIntegrante.violencia_psicologica"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.violencia_sexual"
             :pregunta="preguntasIntegrante.violencia_sexual"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.violencia_institucional"
             :pregunta="preguntasIntegrante.violencia_institucional"
+            sm="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.violencia_social"
             :pregunta="preguntasIntegrante.violencia_social"
             sm="6"
-            md="6"
+            md="4"
+            xl="3"
         />
         <input-pregunta
             :respuesta="model.respuestas.violencia_gestacion"
             :pregunta="preguntasIntegrante.violencia_gestacion"
+            sm="6"
+            md="4"
+            xl="3"
         />
       </v-row>
     </v-container>
@@ -74,6 +111,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import {integrante} from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'SaludMental',
   components: {InputPregunta},
@@ -91,6 +129,27 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
+      }
+    }
+  },
+  watch:{
+    model:{
+      handler(){
+        this.validaLogica()
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  methods: {
+    validaLogica() {
+      this.tratamiento()
+    },
+    tratamiento(){
+      if(this.model.respuestas.tratamiento.model === integrante.tratamiento) this.model.respuestas.diagnostico.show = true
+      else {
+        this.model.respuestas.diagnostico.show = false
+        this.model.respuestas.diagnostico.model = null
       }
     }
   }

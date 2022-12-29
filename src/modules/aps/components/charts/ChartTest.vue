@@ -40,6 +40,10 @@
       puntaje: {
         type: Number,
         default: 0
+      },
+      maximo: {
+        type: Number,
+        default: 0
       }
     },
     provide: {
@@ -47,7 +51,7 @@
     },
     setup (props) {
       const charGauge = ref(null)
-      const total = 150
+      const total = props.maximo
       const value = props.puntaje
       const percetn = computed(() => option.value.series[0].data[0].value / total)
       const option = ref({
@@ -56,7 +60,7 @@
         series: [
           {
             min: 0,
-            max: 150,
+            max: total,
             type: 'gauge',
             startAngle: 180,
             endAngle: 0,
@@ -66,9 +70,9 @@
               lineStyle: {
                 width: 14,
                 color: [
-                  [0.25, '#FF0000'],
-                  [0.5625, '#D79B00'],
-                  [1, '#6BD700']
+                  [0.25, '#4caf50'],
+                  [0.5625, '#fb8c00'],
+                  [1, '#ff5252']
                 ]
               }
             },

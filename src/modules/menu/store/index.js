@@ -10,8 +10,10 @@ const getters = {
         let menuPrincipal = []
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'inicio'))
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'encuestasAPS'))
+        menuPrincipal.push(state.itemsMenu.find(x => x.id === 'integrantesAPS'))
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'usuarios'))
         if(rootGetters['auth/permissionByName']('roles.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'roles'))
+        menuPrincipal.push(state.itemsMenu.find(x => x.id === 'roles'))
         return menuPrincipal
     }
 }

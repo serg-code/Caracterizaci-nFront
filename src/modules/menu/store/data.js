@@ -35,5 +35,14 @@ export const itemsMenu = [
         color: 'green',
         routeName: 'EncuestasAPS',
         typeRoute: 'aps'
+    },
+    {
+        id: 'integrantesAPS',
+        title: 'Encuestados APS',
+        subtitle: 'Integrantes de encuestas',
+        icon: 'mdi-clipboard-account',
+        color: 'primary',
+        routeName: 'IntegrantesAPS',
+        typeRoute: 'aps'
     }
 ]

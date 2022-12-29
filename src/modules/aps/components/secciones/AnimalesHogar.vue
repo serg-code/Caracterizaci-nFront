@@ -86,6 +86,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import { hogar } from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'AnimalesHogar',
   components: {InputPregunta},
@@ -123,7 +124,7 @@ export default {
       this.porcinos()
     },
     porcinos(){
-      if(this.model.respuestas.porcinos.model === 359) {
+      if(this.model.respuestas.porcinos.model === hogar.porcinos) {
         this.model.respuestas.porcinos_cuantos.show = true
         this.model.respuestas.porcinos_vacunados.show = true
       }
@@ -135,7 +136,7 @@ export default {
       }
     },
     equinos(){
-      if(this.model.respuestas.equinos.model === 353) {
+      if(this.model.respuestas.equinos.model === hogar.equinos) {
         this.model.respuestas.equinos_cuantos.show = true
         this.model.respuestas.equinos_vacunados.show = true
       }
@@ -147,7 +148,7 @@ export default {
       }
     },
     perros(){
-      if(this.model.respuestas.perros.model === 349) {
+      if(this.model.respuestas.perros.model === hogar.perros) {
         this.model.respuestas.perros_cuantos.show = true
         this.model.respuestas.perros_vacunados.show = true
       }
@@ -159,7 +160,7 @@ export default {
       }
     },
     gatos(){
-      if(this.model.respuestas.gatos.model === 345) {
+      if(this.model.respuestas.gatos.model === hogar.gatos) {
         this.model.respuestas.gatos_cuantos.show = true
         this.model.respuestas.gatos_vacunados.show = true
       }

@@ -5,6 +5,7 @@
       :sm="sm || cols"
       :md="md || sm || cols"
       :lg="lg || md || sm || cols"
+      :xl="xl || lg || md || sm || cols"
   >
     <input-select
         v-if="pregunta.tipo === 'seleccion' || pregunta.tipo === 'seleccion_multiple'"
@@ -81,6 +82,10 @@ export default {
       default: '',
     },
     lg: {
+      type: String,
+      default: '',
+    },
+    xl: {
       type: String,
       default: '',
     },
