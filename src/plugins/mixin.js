@@ -31,6 +31,8 @@ Vue.mixin({
       if (birthDate && this.moment(birthDate).isValid()) {
         let a = this.moment()
         let b = this.moment(birthDate)
+        const totalMonths = a.diff(b, 'months')
+
         let years = a.diff(b, 'year')
         b.add(years, 'years')
 
@@ -49,10 +51,11 @@ Vue.mixin({
 
         if(inHours) stringDate = stringDate + (years || months || days ? hours ? ` ${hours} hora${hours === 1 ? '' : 's'}` : '' : '')
         return {
-          stringDate: stringDate,
-          years: years,
-          months: months,
-          days: days
+          stringDate,
+          years,
+          months,
+          days,
+          totalMonths
         }
       } else {
         return {

@@ -1,5 +1,6 @@
 const PropsRespuesta = {
     show: true,
+    showSeccion: true,
     model: null
 }
 

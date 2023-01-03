@@ -27,44 +27,44 @@ const dateValidate = (value, operator) => {
 
 extend('required', {
   ...required,
-  message: 'The field {_field_} is required',
+  message: 'El campo {_field_} es requerido',
 })
 
 extend('email', {
   ...email,
-  message: 'The email is not valid',
+  message: 'El Email no es válido',
 })
 
 extend('numeric', {
   ...numeric,
-  message: 'The field {_field_} may only contain numeric characters',
+  message: 'El campo {_field_} solo puede contener carateres numéricos',
 })
 
 extend('confirmed', {
   params: ['target'],
   ...confirmed,
-  message: 'The {target} confirmation does not match',
+  message: 'El campo {target} de confirmación no coincide',
 })
 
 extend('max_value', {
   params: ['max'],
   // eslint-disable-next-line camelcase
   ...max_value,
-  message: 'The {_field_} field must be {max} or less',
+  message: 'El campo {_field_} debe ser {max} o menos',
 })
 
 extend('min_value', {
   params: ['min'],
   // eslint-disable-next-line camelcase
   ...min_value,
-  message: 'The {_field_} field must be {min} or more',
+  message: 'El campo {_field_} debe ser {min} o más',
 })
 
 extend('validDate', {
   validate(value) {
     return dateValidate(value, '/')
   },
-  message: 'The {_field_} field is not valid',
+  message: 'En el campo {_field_}, la fecha no es válida',
 })
 
 extend('validPhone', {
@@ -72,7 +72,7 @@ extend('validPhone', {
     if (!value) return true
     const number = Number(value.split('-').filter(x => x).join(''))
 
-    return (Number.isInteger(number) && String(number)?.length === 10) || 'The {_field_} field must be 10 digits'
+    return (Number.isInteger(number) && String(number)?.length === 10) || 'El campo {_field_} debe tener 10 dígitos'
   },
 })
 
@@ -81,7 +81,7 @@ extend('min_date', {
   validate(value, { min }) {
     if (!min || !dateValidate(min, '-')) return true
 
-    return moment(value, dateFormat).valueOf() >= moment(min).valueOf() || `The {_field_} field must be ${moment(min).format(dateFormat)} or more`
+    return moment(value, dateFormat).valueOf() >= moment(min).valueOf() || `La fecha {_field_} debe ser ${moment(min).format(dateFormat)} o más`
   },
 })
 
@@ -90,7 +90,7 @@ extend('max_date', {
   validate(value, { max }) {
     if (!max || !dateValidate(max, '-')) return true
 
-    return moment(value, dateFormat).valueOf() <= moment(max).valueOf() || `The {_field_} field must be ${moment(max).format(dateFormat)} or less`
+    return moment(value, dateFormat).valueOf() <= moment(max).valueOf() || `La fecha {_field_} debe ser ${moment(max).format(dateFormat)} o menos`
   },
 })
 
@@ -99,7 +99,7 @@ extend('minimumAge', {
   validate(value, { param }) {
     return ((moment().diff(moment(value, dateFormat), 'years')) >= Number(param))
   },
-  message: 'You must be at least {param} years old to order tests on this website',
+  message: 'La edad mínima debe ser {param} o más',
 })
 
 extend('passwordLength', {
@@ -110,7 +110,7 @@ extend('passwordLength', {
 
     return String(value).length >= length
   },
-  message: 'The {_field_} field must be at least {param} characters in length',
+  message: 'El campo {_field_} debe tener al menos {param} caracteres de longitud',
 })
 
 extend('uniqueUserEmail', {
@@ -121,13 +121,13 @@ extend('uniqueUserEmail', {
       .then(() => false)
       .catch(() => true)
   },
-  message: 'The {_field_} field already exists',
+  message: 'El valor de {_field_} ya existe',
 })
 
 extend('digits', {
   params: ['length'],
   ...digits,
-  message: 'The {_field_} field must be numeric and contains exactly {length} digits',
+  message: 'El campo {_field_} debe ser numérico y contener exactamente {length} dígitos',
 })
 
 extend('maxlength', {

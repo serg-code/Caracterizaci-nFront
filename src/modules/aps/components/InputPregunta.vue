@@ -1,6 +1,6 @@
 <template>
   <v-col
-      v-if="model.show"
+      v-if="model.show && model.showSeccion"
       :cols="cols"
       :sm="sm || cols"
       :md="md || sm || cols"

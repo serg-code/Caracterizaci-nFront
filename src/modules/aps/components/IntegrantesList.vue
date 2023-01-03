@@ -26,11 +26,12 @@
     <v-expand-transition>
       <div v-if="open && integrantes.length">
         <v-card-text>
-          <v-list>
+          <v-list class="pa-0">
             <template v-for="(integrante, indexIntegrante) in integrantes">
               <v-list-item
                   :key="`integrante${indexIntegrante}`"
               >
+                <v-icon large class="mr-2">mdi-face-{{integrante.sexo === 'Masculino' ? 'man' : 'woman'}}</v-icon>
                 <v-list-item-content>
                   <v-list-item-title>
                     {{[integrante.primer_nombre, integrante.segundo_nombre, integrante.primer_apellido, integrante.segundo_apellido].filter(x => x).join(' ')}}
@@ -39,7 +40,7 @@
                     {{[integrante.tipo_identificacion, integrante.identificacion].filter(x => x).join('')}}
                   </v-list-item-subtitle>
                 </v-list-item-content>
-                <v-list-item-action>
+                <v-list-item-action style="display: block;">
                   <v-btn
                       icon
                       color="warning"
@@ -56,6 +57,10 @@
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
+              <v-divider
+                  v-if="indexIntegrante < (integrantes.length - 1)"
+                  :key="`integrante_divider${indexIntegrante}`"
+              />
             </template>
           </v-list>
         </v-card-text>

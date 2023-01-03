@@ -31,6 +31,7 @@
               v-model="vmodel"
               :integrante.sync="model"
               :editing.sync="editing"
+              @edited="step = 1"
               @closeModal="cancelar"
           />
           <v-window
@@ -52,6 +53,7 @@
                   <component
                       :is="seccion.component"
                       :seccion="seccion"
+                      :integrante="model"
                       style="margin-bottom: 60px !important;"
                   />
                   <navegacion-encuesta
@@ -87,6 +89,9 @@ import IdentificacionCiudadana from '@/modules/aps/components/secciones/integran
 import SaludMental from '@/modules/aps/components/secciones/integrante/SaludMental'
 import EnfermedadesSaludPublica from '@/modules/aps/components/secciones/integrante/EnfermedadesSaludPublica'
 import IntegranteMorbilidad from '@/modules/aps/components/secciones/integrante/IntegranteMorbilidad'
+// Cursos de vida
+import PrimeraInfancia from '@/modules/aps/components/secciones/integrante/cursosVida/PrimeraInfancia'
+import Infancia from '@/modules/aps/components/secciones/integrante/cursosVida/Infancia'
 
 import NavegacionEncuesta from '@/modules/aps/components/NavegacionEncuesta'
 export default {
@@ -100,7 +105,10 @@ export default {
     IdentificacionCiudadana,
     SaludMental,
     EnfermedadesSaludPublica,
-    IntegranteMorbilidad
+    IntegranteMorbilidad,
+    // Cursos de vida
+    PrimeraInfancia,
+    Infancia
   },
   mixins: [APSMixin],
   props: {

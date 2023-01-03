@@ -11,6 +11,7 @@
           :editing.sync="editing"
       />
       <integrantes-list
+          v-if="!editing"
           v-model="model"
           class="my-4"
       />

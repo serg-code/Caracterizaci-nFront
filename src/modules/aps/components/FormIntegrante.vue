@@ -206,20 +206,12 @@ export default {
         if (result) {
           this.loading = true
           const data = this.convertirDataIntegrante(this.clone(this.value), this.clone(this.model))
-          // let dataEncuesta = this.clone(this.value)
-          // const copiaIntegrante = this.clone(this.model)
-          // if(!copiaIntegrante.id) copiaIntegrante.id = uuid.v1()
-          // copiaIntegrante.hogar_id = dataEncuesta.id
-          // const indexIntegrante = dataEncuesta.integrantes.findIndex(x => x.id === copiaIntegrante.id)
-          // if(indexIntegrante > -1) dataEncuesta.integrantes.splice(indexIntegrante, 1)
-          // dataEncuesta.integrantes.splice(0, 0, copiaIntegrante)
-          // dataEncuesta.encuesta = this.clone(dataEncuesta)
-          // const dataIntegrante = this.clone(copiaIntegrante)
           data.dataIntegrante.secciones = null
           const response = await this.integranteSave({ encuesta: data.dataEncuesta.encuesta, integrante: data.dataIntegrante })
           if(response) {
             this.$emit('input', data.dataEncuesta.encuesta)
             this.$emit('update:integrante', data.copiaIntegrante)
+            this.$emit('edited')
             this.cancelar()
           }
           this.loading = false
