@@ -111,6 +111,7 @@ export default {
         },
         validadorSeccionIntegrante(seccion, integrante) {
             const edad = integrante?.fecha_nacimiento && this.calculateAge(integrante.fecha_nacimiento) || null
+            const sexo = integrante?.sexo || null
             if(seccion && integrante && edad?.days){
                 switch (seccion.ref_seccion) {
                     case 'primera_infancia': {
@@ -163,7 +164,7 @@ export default {
                             })
                             seccion.show = false
                         } else {
-                            seccion.respuestas['in_vacuna_fiebre_amarilla'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
+                            seccion.respuestas['juv_cancer_cuello_uterino'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
                             seccion.respuestas['in_vacuna_vph_d1'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
                             seccion.respuestas['in_vacuna_vph_d2'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
                             seccion.respuestas['in_vacuna_vph_d3'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
@@ -175,6 +176,46 @@ export default {
                             seccion.respuestas['in_fluor'].showSeccion = (edad.years >= 6 && edad.years <= 11)
                             seccion.respuestas['in_profilaxis'].showSeccion = (edad.years >= 6 && edad.years <= 11)
                             seccion.respuestas['in_sellantes'].showSeccion = (edad.years >= 6 && edad.years <= 11)
+                            seccion.show = true
+                        }
+                        break
+                    }
+                    case 'adolecencia': {
+                        if (edad?.years <= 11 || edad?.years >= 18) {
+                            Object.values(seccion.respuestas).forEach(x => {
+                                x.model = null
+                            })
+                            seccion.show = false
+                        } else {
+                            seccion.respuestas['adol_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adol_metodo_planficica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adol_desde_cuando_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adol_razon_no_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adol_atencion_medica'].showSeccion = (edad.years === 12) || (edad.years === 14) || (edad.years === 16)
+                            seccion.respuestas['adol_atencion_enfermeria'].showSeccion = (edad.years === 13) || (edad.years === 15) || (edad.years === 17)
+                            seccion.show = true
+                        }
+                        break
+                    }
+                    case 'juventud': {
+                        if (edad?.years <= 17 || edad?.years >= 29) {
+                            Object.values(seccion.respuestas).forEach(x => {
+                                x.model = null
+                            })
+                            seccion.show = false
+                        } else {
+                            seccion.respuestas['juv_cancer_cuello_uterino'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_colposcopia'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_bioscopia_cervico'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_examen_seno'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_metodo_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_tiempo_metodo'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_razones_no_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_atencion_enfermeria'].showSeccion = (edad.years >= 20 && edad.years <= 28)
+                            seccion.respuestas['juv_vasectomia'].showSeccion = sexo === 'Masculino'
+                            seccion.respuestas['juv_esterilizacion_femenina'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_vias_esterilizacion'].showSeccion = sexo === 'Femenino'
                             seccion.show = true
                         }
                         break

@@ -5,8 +5,12 @@ import IdentificacionCiudadana from '@/modules/aps/models/integrante/Identificac
 import SaludMental from '@/modules/aps/models/integrante/SaludMental'
 import EnfermedadesSaludPublica from '@/modules/aps/models/integrante/EnfermedadesSaludPublica'
 import Morbilidad from '@/modules/aps/models/integrante/Morbilidad'
+
+// Cursos de vida
 import PrimeraInfancia from '@/modules/aps/models/integrante/cursoVida/PrimeraInfancia'
 import Infancia from '@/modules/aps/models/integrante/cursoVida/Infancia'
+import Adolecencia from '@/modules/aps/models/integrante/cursoVida/Adolecencia'
+import Juventud from '@/modules/aps/models/integrante/cursoVida/Juventud'
 
 const Integrante = {
     id: null,
@@ -28,8 +32,10 @@ const Integrante = {
     puntaje_max: 0,
     estado_registro: 'ABIERTO',
     secciones: {
-        infancia: Infancia,
+        juventud: Juventud,
         primera_infancia: PrimeraInfancia,
+        infancia: Infancia,
+        adolecencia: Adolecencia,
         identificacion_ciudadana: IdentificacionCiudadana,
         cuidado_enfermedades: CuidadosEnfermedades,
         accidentes: Accidentes,

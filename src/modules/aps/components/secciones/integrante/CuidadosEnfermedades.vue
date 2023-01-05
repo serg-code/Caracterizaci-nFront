@@ -56,12 +56,12 @@
             sm="6"
             md="4"
         />
-        <input-pregunta
-            :respuesta="model.respuestas.enfermedades_cronicas"
-            :pregunta="preguntasIntegrante.enfermedades_cronicas"
-            sm="6"
-            md="4"
-        />
+<!--        <input-pregunta-->
+<!--            :respuesta="model.respuestas.enfermedades_cronicas"-->
+<!--            :pregunta="preguntasIntegrante.enfermedades_cronicas"-->
+<!--            sm="6"-->
+<!--            md="4"-->
+<!--        />-->
         <input-pregunta
             :respuesta="model.respuestas.diabetes"
             :pregunta="preguntasIntegrante.diabetes"

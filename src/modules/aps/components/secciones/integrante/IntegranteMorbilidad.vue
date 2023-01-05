@@ -12,10 +12,20 @@
             :respuesta="model.respuestas.enfermedad_cronica"
             :pregunta="preguntasIntegrante.enfermedad_cronica"
         />
-        <input-pregunta
-            :respuesta="model.respuestas.enfermedad_cronica_cual"
-            :pregunta="preguntasIntegrante.enfermedad_cronica_cual"
-        />
+        <v-col
+            v-if="model.respuestas.enfermedad_cronica_cual.show"
+            cols="12"
+        >
+          <search-cie10
+              v-model="model.respuestas.enfermedad_cronica_cual.model"
+              item-text="descrip"
+              item-value="codigo"
+              tipo="EnfermedadCronica"
+              :name="preguntasIntegrante.enfermedad_cronica_cual.descripcion"
+              :label="preguntasIntegrante.enfermedad_cronica_cual.descripcion"
+              rules="required"
+          />
+        </v-col>
         <input-pregunta
             :respuesta="model.respuestas.controlada"
             :pregunta="preguntasIntegrante.controlada"
@@ -40,10 +50,11 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import SearchCie10 from '@/modules/aps/components/input/SearchCie10'
 import {integrante} from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'IntegranteMorbilidad',
-  components: {InputPregunta},
+  components: {InputPregunta, SearchCie10},
   props: {
     seccion: {
       type:Object,

@@ -92,6 +92,8 @@ import IntegranteMorbilidad from '@/modules/aps/components/secciones/integrante/
 // Cursos de vida
 import PrimeraInfancia from '@/modules/aps/components/secciones/integrante/cursosVida/PrimeraInfancia'
 import Infancia from '@/modules/aps/components/secciones/integrante/cursosVida/Infancia'
+import Adolecencia from '@/modules/aps/components/secciones/integrante/cursosVida/Adolecencia'
+import Juventud from '@/modules/aps/components/secciones/integrante/cursosVida/Juventud'
 
 import NavegacionEncuesta from '@/modules/aps/components/NavegacionEncuesta'
 export default {
@@ -108,7 +110,9 @@ export default {
     IntegranteMorbilidad,
     // Cursos de vida
     PrimeraInfancia,
-    Infancia
+    Infancia,
+    Adolecencia,
+    Juventud
   },
   mixins: [APSMixin],
   props: {

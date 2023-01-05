@@ -29,6 +29,13 @@ const integrante = {
     // PrimeraInfancia
     pi_carnet_vacunacion: 377,
     // Infancia
-    in_carnet_vacunacion: 459
+    in_carnet_vacunacion: 459,
+    // Adolecencia
+    adol_vacunacion: 533,
+    adol_planifica: 493,
+    // Juventud
+    juv_cancer_cuello_uterino: 542,
+    juv_planifica: 553,
+    juv_esterilizacion_femenina: 589,
 }
 export { hogar, integrante }

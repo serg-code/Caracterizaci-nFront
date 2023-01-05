@@ -57,10 +57,20 @@
             md="4"
             xl="3"
         />
-        <input-pregunta
-            :respuesta="model.respuestas.diagnostico"
-            :pregunta="preguntasIntegrante.diagnostico"
-        />
+        <v-col
+            v-if="model.respuestas.diagnostico.show"
+            cols="12"
+        >
+          <search-cie10
+              v-model="model.respuestas.diagnostico.model"
+              item-text="descrip"
+              item-value="codigo"
+              tipo="SaludMental"
+              :name="preguntasIntegrante.diagnostico.descripcion"
+              :label="preguntasIntegrante.diagnostico.descripcion"
+              rules="required"
+          />
+        </v-col>
         <input-pregunta
             :respuesta="model.respuestas.violencia_fisica"
             :pregunta="preguntasIntegrante.violencia_fisica"
@@ -111,10 +121,11 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import SearchCie10 from '@/modules/aps/components/input/SearchCie10'
 import {integrante} from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'SaludMental',
-  components: {InputPregunta},
+  components: {InputPregunta, SearchCie10},
   props: {
     seccion: {
       type:Object,

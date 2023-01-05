@@ -13,7 +13,7 @@ const CuidadosEnfermedades = {
         fuma: PropsRespuesta,
         actividad_fisica: PropsRespuesta,
         vacuna_fiebre_amarilla: PropsRespuesta,
-        enfermedades_cronicas: PropsRespuesta,
+        // enfermedades_cronicas: PropsRespuesta,
         diabetes: PropsRespuesta,
         hipertencion_trimestral: PropsRespuesta,
         diabetes_trimestral: PropsRespuesta,

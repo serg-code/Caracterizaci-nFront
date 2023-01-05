@@ -68,6 +68,10 @@ export default {
       type: [Number, String, Object, Array],
       default: null,
     },
+    tipo: {
+      type: String,
+      default: null, // SaludMental, EnfermedadCronica, null
+    },
     itemValue: {
       type: String,
       default: 'value',
