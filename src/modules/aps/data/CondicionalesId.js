@@ -37,5 +37,11 @@ const integrante = {
     juv_cancer_cuello_uterino: 542,
     juv_planifica: 553,
     juv_esterilizacion_femenina: 589,
+    // Adultez
+    adul_planifica: 620,
+    adul_esterilizacion_femenina: 686,
+    // Vejez
+    ve_planifica: 701,
+    ve_esterilizacion_femenina: 770,
 }
 export { hogar, integrante }

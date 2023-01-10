@@ -94,6 +94,8 @@ import PrimeraInfancia from '@/modules/aps/components/secciones/integrante/curso
 import Infancia from '@/modules/aps/components/secciones/integrante/cursosVida/Infancia'
 import Adolecencia from '@/modules/aps/components/secciones/integrante/cursosVida/Adolecencia'
 import Juventud from '@/modules/aps/components/secciones/integrante/cursosVida/Juventud'
+import Adultez from '@/modules/aps/components/secciones/integrante/cursosVida/Adultez'
+import Vejez from '@/modules/aps/components/secciones/integrante/cursosVida/Vejez'
 
 import NavegacionEncuesta from '@/modules/aps/components/NavegacionEncuesta'
 export default {
@@ -112,7 +114,9 @@ export default {
     PrimeraInfancia,
     Infancia,
     Adolecencia,
-    Juventud
+    Juventud,
+    Adultez,
+    Vejez
   },
   mixins: [APSMixin],
   props: {

@@ -112,7 +112,8 @@ export default {
         validadorSeccionIntegrante(seccion, integrante) {
             const edad = integrante?.fecha_nacimiento && this.calculateAge(integrante.fecha_nacimiento) || null
             const sexo = integrante?.sexo || null
-            if(seccion && integrante && edad?.days){
+            console.log('seccion', seccion)
+            if(seccion && integrante){
                 switch (seccion.ref_seccion) {
                     case 'primera_infancia': {
                         if (edad?.years > 5) {
@@ -216,6 +217,59 @@ export default {
                             seccion.respuestas['juv_vasectomia'].showSeccion = sexo === 'Masculino'
                             seccion.respuestas['juv_esterilizacion_femenina'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['juv_vias_esterilizacion'].showSeccion = sexo === 'Femenino'
+                            seccion.show = true
+                        }
+                        break
+                    }
+                    case 'adultez': {
+                        if (edad?.years <= 28 || edad?.years >= 60) {
+                            Object.values(seccion.respuestas).forEach(x => {
+                                x.model = null
+                            })
+                            seccion.show = false
+                        } else {
+                            seccion.respuestas['adul_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adul_metodo_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adul_desde_cuando_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adul_razones_no_planifica'].showSeccion = sexo === 'Femenino'
+
+                            seccion.respuestas['adul_cancer_cuello_uterino_adn_vph'].showSeccion = sexo === 'Femenino' && (edad.years >= 30 && edad.years <= 59)
+                            seccion.respuestas['adul_cancer_cuello_uterino_adn_vph_positivo'].showSeccion = sexo === 'Femenino' && (edad.years >= 30 && edad.years <= 59)
+                            seccion.respuestas['adul_colposcopia_cervico_uterina'].showSeccion = sexo === 'Femenino' && (edad.years >= 30 && edad.years <= 59)
+                            seccion.respuestas['adul_biopsia_cervico_uterina'].showSeccion = sexo === 'Femenino' && (edad.years >= 30 && edad.years <= 59)
+                            seccion.respuestas['adul_cancer_mama_mamografia'].showSeccion = sexo === 'Femenino' && (edad.years >= 50 && edad.years <= 59)
+                            seccion.respuestas['adul_cancer_mama_valoracion_clinica'].showSeccion = sexo === 'Femenino' && (edad.years >= 40 && edad.years <= 59)
+                            seccion.respuestas['adul_cancer_prostata'].showSeccion = sexo === 'Masculino' && (edad.years >= 50 && edad.years <= 59)
+                            seccion.respuestas['adul_vasectomia'].showSeccion = sexo === 'Masculino'
+                            seccion.respuestas['adul_esterilizacion_femenina'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['adul_vias_esterilizacion'].showSeccion = sexo === 'Femenino'
+                            seccion.show = true
+                        }
+                        break
+                    }
+                    case 'vejez': {
+                        if (edad?.years < 60) {
+                            Object.values(seccion.respuestas).forEach(x => {
+                                x.model = null
+                            })
+                            seccion.show = false
+                        } else {
+                            seccion.respuestas['ve_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_metodo_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_desde_cuando_planifica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_razones_no_planifica'].showSeccion = sexo === 'Femenino'
+
+                            seccion.respuestas['ve_cancer_cuello_uterino_adn_vph'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_cancer_cuello_uterino_adn_vph_positivo'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_colposcopia_uterina'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_bioscopia_uterina'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_cancer_mama_mamografia'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_cancer_mama_valoracion_clinica'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_cancer_prostata_psa'].showSeccion = sexo === 'Masculino'
+                            seccion.respuestas['ve_cancer_prostata_rectal'].showSeccion = sexo === 'Masculino'
+                            seccion.respuestas['ve_vasectomia'].showSeccion = sexo === 'Masculino'
+                            seccion.respuestas['ve_esterilizacion_femenina'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['ve_vias_esterilizacion'].showSeccion = sexo === 'Femenino'
                             seccion.show = true
                         }
                         break

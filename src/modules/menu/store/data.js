@@ -44,5 +44,14 @@ export const itemsMenu = [
         color: 'primary',
         routeName: 'IntegrantesAPS',
         typeRoute: 'aps'
+    },
+    {
+        id: 'areasTerritorialesAPS',
+        title: 'Áreas territoriales',
+        subtitle: 'Barrios, veredas y corregimientos',
+        icon: 'mdi-puzzle',
+        color: 'purple',
+        routeName: 'AreasTerritorialesAPS',
+        typeRoute: 'aps'
     }
 ]

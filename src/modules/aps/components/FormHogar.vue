@@ -41,6 +41,7 @@
                 label="Departamento"
                 rules="required"
                 @inputObject="val => model.departamentoObj = val"
+                @change="changeDepartamento"
             />
           </v-col>
           <v-col cols="12" md="6">
@@ -55,32 +56,34 @@
                 rules="required"
                 no-radio
                 @inputObject="val => model.municipioObj = val"
+                @change="changeMunicipio"
             />
           </v-col>
-                <v-col cols="12" md="6">
-                  <input-select
-                      v-model="model.zona"
-                      :items="zonas"
-                      :disabled="!model.cod_mun"
-                      name="Zona"
-                      label="Zona"
-                      rules="required"
-                      no-radio
-                  />
-                </v-col>
-                <v-col cols="12" md="6">
-                  <search-barrios
-                      v-model="model.barrio_vereda_id"
-                      :disabled="!model.zona"
-                      :municipio="model.cod_mun"
-                      :zona="model.zona"
-                      item-text="nombre"
-                      item-value="id"
-                      name="Barrio"
-                      label="Barrio"
-                      rules="required"
-                  />
-                </v-col>
+          <v-col cols="12" md="6">
+            <input-select
+                v-model="model.zona"
+                :items="zonas"
+                :disabled="!model.cod_mun"
+                name="Zona"
+                label="Zona"
+                rules="required"
+                no-radio
+                @change="changeZona"
+            />
+          </v-col>
+          <v-col cols="12" md="6">
+            <search-barrios
+                v-model="model.barrio_vereda_id"
+                :disabled="!model.zona"
+                :municipio="model.cod_mun"
+                :zona="model.zona"
+                item-text="nombre"
+                item-value="id"
+                name="Barrio"
+                label="Barrio"
+                rules="required"
+            />
+          </v-col>
           <v-col cols="12">
             <input-text
                 v-model="model.direccion"
@@ -172,6 +175,18 @@ export default {
           }
         }
       })
+    },
+    changeDepartamento() {
+      this.model.cod_mun = null
+      this.model.zona = null
+      this.model.barrio_vereda_id = null
+    },
+    changeMunicipio() {
+      this.model.zona = null
+      this.model.barrio_vereda_id = null
+    },
+    changeZona() {
+      this.model.barrio_vereda_id = null
     },
     editar() {
       this.$emit('update:editing', true)

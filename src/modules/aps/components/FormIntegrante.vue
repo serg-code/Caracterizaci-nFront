@@ -1,6 +1,10 @@
 <template>
   <v-card>
-    <v-card-title :class="editing ? '' : 'pb-0'" class="text-start">
+    <v-card-title
+        v-if="editing"
+        :class="editing ? '' : 'pb-0'"
+        class="text-start"
+    >
       <v-icon large class="mr-1">mdi-account</v-icon>
       Identificación del integrante
     </v-card-title>
@@ -9,9 +13,11 @@
         class="pa-0"
     >
       <v-list-item>
+        <v-icon large class="mr-2">mdi-face-{{integrante.sexo === 'Masculino' ? 'man' : 'woman'}}</v-icon>
         <v-list-item-content>
           <v-list-item-title class="title">{{ [integrante.primer_nombre, integrante.segundo_nombre, integrante.primer_apellido, integrante.segundo_apellido].filter(x => x).join(' ') }}</v-list-item-title>
           <v-list-item-subtitle>{{ [integrante.tipo_identificacion, integrante.identificacion].filter(x => x).join('') }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ edad && edad.stringDate || '' }}</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
           <v-btn
@@ -190,6 +196,9 @@ export default {
     loading: false
   }),
   computed: {
+    edad(){
+      return this.integrante?.fecha_nacimiento && this.calculateAge(this.integrante.fecha_nacimiento) || null
+    },
     ...mapState('aps',['tiposIdentificacion', 'rhs', 'estadosCiviles'])
   },
   watch: {

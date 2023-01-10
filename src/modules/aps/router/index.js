@@ -44,6 +44,16 @@ export default {
                 title: 'Resultado de encuesta',
                 footer: true
             }
+        },
+        {
+            name: 'AreasTerritorialesAPS',
+            path: 'areas-territoriales',
+            component: () => import('@/modules/aps/views/AreasTerritoriales.vue'),
+            meta: {
+                requiresAuth: true,
+                title: 'Areas territoriales',
+                footer: true
+            }
         }
     ]
 }

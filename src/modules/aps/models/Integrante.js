@@ -11,6 +11,8 @@ import PrimeraInfancia from '@/modules/aps/models/integrante/cursoVida/PrimeraIn
 import Infancia from '@/modules/aps/models/integrante/cursoVida/Infancia'
 import Adolecencia from '@/modules/aps/models/integrante/cursoVida/Adolecencia'
 import Juventud from '@/modules/aps/models/integrante/cursoVida/Juventud'
+import Adultez from '@/modules/aps/models/integrante/cursoVida/Adultez'
+import Vejez from '@/modules/aps/models/integrante/cursoVida/Vejez'
 
 const Integrante = {
     id: null,
@@ -32,10 +34,12 @@ const Integrante = {
     puntaje_max: 0,
     estado_registro: 'ABIERTO',
     secciones: {
-        juventud: Juventud,
         primera_infancia: PrimeraInfancia,
         infancia: Infancia,
         adolecencia: Adolecencia,
+        juventud: Juventud,
+        adultez: Adultez,
+        vejez: Vejez,
         identificacion_ciudadana: IdentificacionCiudadana,
         cuidado_enfermedades: CuidadosEnfermedades,
         accidentes: Accidentes,

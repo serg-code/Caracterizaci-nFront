@@ -22,7 +22,7 @@
               <template v-slot:item.id="{ item }">
                 <div style="display: flex;">
                   <v-badge
-                      :disabled="!item.cabeza_familia"
+                      :value="item.cabeza_familia && item.cabeza_familia !== 'NO'"
                       color="success"
                       icon="mdi-shield-check"
                       overlap

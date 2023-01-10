@@ -19,5 +19,12 @@ export default [
     changes: 1,
     version: 1,
     headers: [],
+  },
+  {
+    name: 'rowsAreasTerritoriales',
+    filters: '',
+    changes: 1,
+    version: 1,
+    headers: [],
   }
 ]

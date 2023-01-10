@@ -31,7 +31,17 @@
               <v-list-item
                   :key="`integrante${indexIntegrante}`"
               >
-                <v-icon large class="mr-2">mdi-face-{{integrante.sexo === 'Masculino' ? 'man' : 'woman'}}</v-icon>
+                <v-badge
+                    :value="integrante.cabeza_familia && integrante.cabeza_familia !== 'NO'"
+                    color="success"
+                    icon="mdi-shield-check"
+                    overlap
+                    offset-y="22"
+                    bottom
+                    left
+                >
+                  <v-icon large class="mr-2">mdi-face-{{integrante.sexo === 'Masculino' ? 'man' : 'woman'}}</v-icon>
+                </v-badge>
                 <v-list-item-content>
                   <v-list-item-title>
                     {{[integrante.primer_nombre, integrante.segundo_nombre, integrante.primer_apellido, integrante.segundo_apellido].filter(x => x).join(' ')}}
@@ -39,8 +49,9 @@
                   <v-list-item-subtitle>
                     {{[integrante.tipo_identificacion, integrante.identificacion].filter(x => x).join('')}}
                   </v-list-item-subtitle>
+                  <v-list-item-subtitle>{{ calculateAge(integrante.fecha_nacimiento) && calculateAge(integrante.fecha_nacimiento).stringDate || '' }}</v-list-item-subtitle>
                 </v-list-item-content>
-                <v-list-item-action style="display: block;">
+                <v-list-item-action style="display: contents;">
                   <v-btn
                       icon
                       color="warning"
