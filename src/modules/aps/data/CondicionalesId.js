@@ -17,6 +17,8 @@ const integrante = {
     programas: 171,
     esta_estudiando: 187,
     discapacidad: 202,
+    // CuidadosEnfermedades
+    ha_estado_embarazada: '1',
     // IntegranteAccidentes
     accidentes_transito: 36,
     // CuidadosDomiciliarios
@@ -43,5 +45,7 @@ const integrante = {
     // Vejez
     ve_planifica: 701,
     ve_esterilizacion_femenina: 770,
+    // MaternoPerinatal
+    ma_hemoparasitos_chagas: 870
 }
 export { hogar, integrante }

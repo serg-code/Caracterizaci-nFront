@@ -53,5 +53,14 @@ export const itemsMenu = [
         color: 'purple',
         routeName: 'AreasTerritorialesAPS',
         typeRoute: 'aps'
+    },
+    {
+        id: 'mapaHogaresAPS',
+        title: 'Georreferenciación hogares',
+        subtitle: 'Georreferenciación de hogares encuestados',
+        icon: 'mdi-map',
+        color: 'indigo',
+        routeName: 'MapaHogaresAPS',
+        typeRoute: 'aps'
     }
 ]

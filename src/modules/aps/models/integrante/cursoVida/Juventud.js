@@ -1,5 +1,5 @@
 import PropsRespuesta from '@/modules/aps/models/PropsRespuesta'
-const Adolecencia = {
+const Juventud = {
     component: 'Juventud',
     ref_seccion: 'juventud',
     descripcion: 'Juventud',
@@ -36,4 +36,4 @@ const Adolecencia = {
     }
 }
 
-export default Adolecencia
+export default Juventud

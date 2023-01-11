@@ -54,6 +54,16 @@ export default {
                 title: 'Areas territoriales',
                 footer: true
             }
+        },
+        {
+            name: 'MapaHogaresAPS',
+            path: 'georreferenciacion-hogares',
+            component: () => import('@/modules/aps/views/MapaHogares.vue'),
+            meta: {
+                requiresAuth: true,
+                title: 'Georreferenciación hogares',
+                footer: true
+            }
         }
     ]
 }

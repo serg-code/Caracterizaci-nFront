@@ -11,6 +11,7 @@ const getters = {
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'inicio'))
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'encuestasAPS'))
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'integrantesAPS'))
+        menuPrincipal.push(state.itemsMenu.find(x => x.id === 'mapaHogaresAPS'))
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'areasTerritorialesAPS'))
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'usuarios'))
         if(rootGetters['auth/permissionByName']('roles.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'roles'))

@@ -17,6 +17,8 @@
         :label="pregunta.descripcion"
         :multiple="pregunta.tipo === 'seleccion_multiple'"
         :rules="rules"
+        :readonly="readonly"
+        :clearable="clearable"
     />
     <input-text
         v-if="pregunta.tipo === 'texto' || pregunta.tipo === 'numero'"
@@ -25,6 +27,9 @@
         :label="pregunta.descripcion"
         :rules="rules"
         :type="pregunta.tipo === 'texto' ? 'text' : 'number'"
+        :readonly="readonly"
+        :clearable="clearable"
+        :decimal="decimal"
     />
     <input-date
         v-if="pregunta.tipo === 'fecha'"
@@ -32,7 +37,10 @@
         :name="pregunta.descripcion"
         :label="pregunta.descripcion"
         :rules="rules"
-        :max="moment().format('YYYY-MM-DD')"
+        :max="max"
+        :min="min"
+        :readonly="readonly"
+        :clearable="clearable"
     />
     <input-text-area
         v-if="pregunta.tipo === 'texto_largo'"
@@ -40,6 +48,8 @@
         :name="pregunta.descripcion"
         :label="pregunta.descripcion"
         :rules="rules"
+        :readonly="readonly"
+        :clearable="clearable"
     />
   </v-col>
 </template>
@@ -88,6 +98,26 @@ export default {
     xl: {
       type: String,
       default: '',
+    },
+    min: {
+      type: [Number, String],
+      default: null,
+    },
+    max: {
+      type: [Number, String],
+      default: null,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    clearable: {
+      type: Boolean,
+      default: true,
+    },
+    decimal: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

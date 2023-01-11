@@ -13,6 +13,7 @@ import Adolecencia from '@/modules/aps/models/integrante/cursoVida/Adolecencia'
 import Juventud from '@/modules/aps/models/integrante/cursoVida/Juventud'
 import Adultez from '@/modules/aps/models/integrante/cursoVida/Adultez'
 import Vejez from '@/modules/aps/models/integrante/cursoVida/Vejez'
+import MaternoPerinatal from '@/modules/aps/models/integrante/cursoVida/MaternoPerinatal'
 
 const Integrante = {
     id: null,
@@ -34,6 +35,7 @@ const Integrante = {
     puntaje_max: 0,
     estado_registro: 'ABIERTO',
     secciones: {
+        materno_perinatal: MaternoPerinatal,
         primera_infancia: PrimeraInfancia,
         infancia: Infancia,
         adolecencia: Adolecencia,

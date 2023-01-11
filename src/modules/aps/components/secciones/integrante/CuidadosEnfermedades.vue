@@ -111,6 +111,39 @@
             :respuesta="model.respuestas.enfermedades_costosas"
             :pregunta="preguntasIntegrante.enfermedades_costosas"
         />
+
+        <input-pregunta
+            :respuesta="model.respuestas.ha_estado_embarazada"
+            :pregunta="preguntasIntegrante.ha_estado_embarazada"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.cuantos_embarazos_ha_tenido"
+            :pregunta="preguntasIntegrante.cuantos_embarazos_ha_tenido"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.hijos_muertos_parto_natural"
+            :pregunta="preguntasIntegrante.hijos_muertos_parto_natural"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.hijos_vivos_parto_natural"
+            :pregunta="preguntasIntegrante.hijos_vivos_parto_natural"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.hijos_muertos_por_cesarea"
+            :pregunta="preguntasIntegrante.hijos_muertos_por_cesarea"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.hijos_vivos_por_cesarea"
+            :pregunta="preguntasIntegrante.hijos_vivos_por_cesarea"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.cuantos_abortos"
+            :pregunta="preguntasIntegrante.cuantos_abortos"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.cuantos_gemelos_multiples"
+            :pregunta="preguntasIntegrante.cuantos_gemelos_multiples"
+        />
       </v-row>
     </v-container>
   </v-card>
@@ -119,6 +152,7 @@
 <script>
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
+import {integrante} from '@/modules/aps/data/CondicionalesId'
 export default {
   name: 'CuidadosEnfermedades',
   components: {InputPregunta},
@@ -165,6 +199,46 @@ export default {
           return {color: 'error', message: 'Hipertensión sistólica aislada'}
         } else return {color: 'warning', message: 'Evaluación no disponible'}
       } else return null
+    }
+  },
+  watch: {
+    model: {
+      handler() {
+        this.validaLogica()
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  methods:{
+    validaLogica(){
+      this.haEstadoEmbarazada()
+    },
+    haEstadoEmbarazada(){
+      if (this.model.respuestas.ha_estado_embarazada.model === integrante.ha_estado_embarazada) {
+        this.model.respuestas.cuantos_embarazos_ha_tenido.show = true
+        this.model.respuestas.hijos_muertos_parto_natural.show = true
+        this.model.respuestas.hijos_vivos_parto_natural.show = true
+        this.model.respuestas.hijos_muertos_por_cesarea.show = true
+        this.model.respuestas.hijos_vivos_por_cesarea.show = true
+        this.model.respuestas.cuantos_abortos.show = true
+        this.model.respuestas.cuantos_gemelos_multiples.show = true
+      } else {
+        this.model.respuestas.cuantos_embarazos_ha_tenido.show = false
+        this.model.respuestas.cuantos_embarazos_ha_tenido.model = null
+        this.model.respuestas.hijos_muertos_parto_natural.show = false
+        this.model.respuestas.hijos_muertos_parto_natural.model = null
+        this.model.respuestas.hijos_vivos_parto_natural.show = false
+        this.model.respuestas.hijos_vivos_parto_natural.model = null
+        this.model.respuestas.hijos_muertos_por_cesarea.show = false
+        this.model.respuestas.hijos_muertos_por_cesarea.model = null
+        this.model.respuestas.hijos_vivos_por_cesarea.show = false
+        this.model.respuestas.hijos_vivos_por_cesarea.model = null
+        this.model.respuestas.cuantos_abortos.show = false
+        this.model.respuestas.cuantos_abortos.model = null
+        this.model.respuestas.cuantos_gemelos_multiples.show = false
+        this.model.respuestas.cuantos_gemelos_multiples.model = null
+      }
     }
   }
 }

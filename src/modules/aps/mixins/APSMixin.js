@@ -115,6 +115,29 @@ export default {
             console.log('seccion', seccion)
             if(seccion && integrante){
                 switch (seccion.ref_seccion) {
+                    case 'cuidado_enfermedades': {
+                        const keys = [
+                            'ha_estado_embarazada',
+                            'cuantos_embarazos_ha_tenido',
+                            'hijos_muertos_parto_natural',
+                            'hijos_vivos_parto_natural',
+                            'hijos_muertos_por_cesarea',
+                            'hijos_vivos_por_cesarea',
+                            'cuantos_abortos',
+                            'cuantos_gemelos_multiples'
+                        ]
+                        if(sexo === 'Femenino' && edad?.years >= 10){
+                            keys.forEach(x => {
+                                seccion.respuestas[x].showSeccion = true
+                            })
+                        } else{
+                            keys.forEach(x => {
+                                seccion.respuestas[x].showSeccion = false
+                                seccion.respuestas[x].model = null
+                            })
+                        }
+                        break
+                    }
                     case 'primera_infancia': {
                         if (edad?.years > 5) {
                             Object.values(seccion.respuestas).forEach(x => {
@@ -270,6 +293,33 @@ export default {
                             seccion.respuestas['ve_vasectomia'].showSeccion = sexo === 'Masculino'
                             seccion.respuestas['ve_esterilizacion_femenina'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['ve_vias_esterilizacion'].showSeccion = sexo === 'Femenino'
+                            seccion.show = true
+                        }
+                        break
+                    }
+                    case 'table_materno_perinatal': {
+                        if (sexo === 'Masculino' || edad?.years < 10) {
+                            Object.values(seccion.respuestas).forEach(x => {
+                                x.model = null
+                            })
+                            seccion.show = false
+                        } else {
+                            // seccion.respuestas['ve_planifica'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_metodo_planifica'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_desde_cuando_planifica'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_razones_no_planifica'].showSeccion = sexo === 'Femenino'
+                            //
+                            // seccion.respuestas['ve_cancer_cuello_uterino_adn_vph'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_cancer_cuello_uterino_adn_vph_positivo'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_colposcopia_uterina'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_bioscopia_uterina'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_cancer_mama_mamografia'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_cancer_mama_valoracion_clinica'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_cancer_prostata_psa'].showSeccion = sexo === 'Masculino'
+                            // seccion.respuestas['ve_cancer_prostata_rectal'].showSeccion = sexo === 'Masculino'
+                            // seccion.respuestas['ve_vasectomia'].showSeccion = sexo === 'Masculino'
+                            // seccion.respuestas['ve_esterilizacion_femenina'].showSeccion = sexo === 'Femenino'
+                            // seccion.respuestas['ve_vias_esterilizacion'].showSeccion = sexo === 'Femenino'
                             seccion.show = true
                         }
                         break

@@ -7,7 +7,7 @@
   >
     <v-text-field
       v-model="model"
-      v-mask="mask"
+      v-mask="decimal ? '' : mask"
       :class="upperCase ? 'c-upper-case' : lowerCase ? 'c-lower-case' : null"
       :placeholder="placeholder"
       :outlined="outlined"
@@ -25,7 +25,8 @@
       :type="type"
       :max="max"
       :min="min"
-      :step="step"
+      :step="decimal ? 0.01 : step"
+      onkeypress="return decimal ? ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46 || event.charCode === 44) : true"
       @focus="changeCase"
       @blur="changeCase"
     >
@@ -87,11 +88,15 @@ export default {
     },
     min: {
       type: Number,
-      default: null,
+      default: 0,
     },
     step: {
       type: Number,
       default: 1,
+    },
+    decimal: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
