@@ -64,7 +64,8 @@
         :subtitle="`¿Está seguro de continuar con el borrado de: ${selectedItem && selectedItem.tipo || ''} ${selectedItem && selectedItem.nombre ? `<strong>${selectedItem.nombre}</strong>` : ''}`"
         text-confirm-button="Si, Borrar"
         action="delete"
-        dispatch="barrio_vereda"
+        success-message="El registro se ha borrado correctamente."
+        :dispatch="`barrio_vereda/${selectedItem && selectedItem.id}`"
         color-confirm-button="error"
         @success="rowsReload"
     />
