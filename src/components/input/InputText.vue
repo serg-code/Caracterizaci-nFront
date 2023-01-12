@@ -26,7 +26,7 @@
       :max="max"
       :min="min"
       :step="decimal ? 0.01 : step"
-      onkeypress="return decimal ? ((event.charCode >= 48 && event.charCode <= 57) || event.charCode === 46 || event.charCode === 44) : true"
+      @keypress="eventKey"
       @focus="changeCase"
       @blur="changeCase"
     >
@@ -116,6 +116,9 @@ export default {
     },
   },
   methods: {
+    eventKey(event){
+      return this.decimal ? ((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode === 46 || event.keyCode === 44) : true
+    },
     changeCase() {
       if (this.model && (this.upperCase || this.lowerCase)) {
         this.model = this.upperCase ? this.model.toUpperCase() : this.model.toLowerCase()
