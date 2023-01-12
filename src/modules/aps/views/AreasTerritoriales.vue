@@ -31,17 +31,11 @@
                 hide-default-footer
                 disable-pagination
             >
-              <template v-slot:item.name="{ item }">
-                <div style="display: grid;">
-                  <span class="font-weight-bold">{{ item.name }}</span>
-                  <span>{{ [item.tipo_identificacion, item.identificacion].filter(x => x).join('') }}</span>
-                </div>
+              <template v-slot:item.nombre="{ item }">
+                {{[item.tipo || '', item.nombre || ''].filter(x => x).join(', ')}}
               </template>
-              <template v-slot:item.email="{ item }">
-                <div style="display: grid;">
-                  <span>{{ item.email }}</span>
-                  <span>{{ item.telefono }}</span>
-                </div>
+              <template v-slot:item.municipio="{ item }">
+                {{[item.municipio ? item.municipio.nombre : '', item.municipio && item.municipio.departamento ? item.municipio.departamento.nombre : ''].filter(x => x).join(', ')}}
               </template>
               <template v-slot:item.options="{ item }">
                 <options-buttons
@@ -89,16 +83,8 @@ export default {
         value: 'nombre',
       },
       {
-        text: 'Tipo',
-        value: 'tipo',
-      },
-      {
         text: 'Municipio',
         value: 'municipio',
-      },
-      {
-        text: 'Departamento',
-        value: 'departamento',
       },
       {
         value: 'options',

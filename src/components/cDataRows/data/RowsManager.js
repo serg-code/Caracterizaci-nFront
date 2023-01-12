@@ -24,7 +24,7 @@ export default [
     name: 'rowsAreasTerritoriales',
     filters: '',
     changes: 1,
-    version: 1,
+    version: 2,
     headers: [],
   }
 ]

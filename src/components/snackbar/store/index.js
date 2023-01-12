@@ -17,8 +17,9 @@ const mutations = {
   },
   setError(state, data) {
     console.log('data', data.error.response.data)
-    const message = `${data?.error?.response?.data?.mensaje || data?.error?.response?.data?.message || data?.message || ''}`
-    const errors = Object.values(data?.error?.response?.data?.data || {})
+    const dataError = data?.error?.response?.data || null
+    const message = `${dataError?.mensaje || dataError?.message || data?.message || ''}`
+    const errors = Object.values(dataError?.data || {})
     const textErrors = errors.join('<br/>')
     const timeout = (errors.length || 1) * 5000
 

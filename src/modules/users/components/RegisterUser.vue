@@ -176,6 +176,7 @@ export default {
         this.loading = true
         this.axios.get(`usuarios/${this.userProp.id}`)
             .then(({ data }) => {
+              if(data?.data?.usuario?.roles?.length) data.data.usuario.roles = data.data.usuario.roles.map(x => x.id)
               this.model = { ...this.makeModel, ...(data?.data?.usuario || {}) }
             })
             .catch(error => this.$store.commit('snackbar/setError', { error }))
@@ -207,6 +208,9 @@ export default {
     },
     close() {
       this.dialog = false
+      setTimeout(() => {
+        this.model = null
+      }, 400)
     }
   }
 }

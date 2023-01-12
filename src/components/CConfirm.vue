@@ -209,11 +209,11 @@ export default {
                 data: this.payload,
               },
             )
-            this.success(!!response.data)
+            this.success(!!response?.data)
             this.close()
             this.$store.commit('snackbar/set', { message: this.successMessage })
-          } catch (e) {
-            this.$store.commit('snackbar/setError', { message: this.catchMessage, e })
+          } catch (error) {
+            this.$store.commit('snackbar/setError', { message: this.catchMessage, error })
             this.success(false)
           }
         }
