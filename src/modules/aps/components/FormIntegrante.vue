@@ -133,11 +133,10 @@
               />
             </v-col>
             <v-col cols="12" md="6">
-              <input-text
+              <input-phone
                   v-model="model.telefono"
                   label="Celular"
                   name="Celular"
-                  type="tel"
                   rules="required"
               />
             </v-col>

@@ -71,8 +71,9 @@ extend('validPhone', {
   validate(value) {
     if (!value) return true
     const number = Number(value.split('-').filter(x => x).join(''))
-
-    return (Number.isInteger(number) && String(number)?.length === 10) || 'El campo {_field_} debe tener 10 dígitos'
+    if(String(number)?.length && String(number)[0] === '3') {
+      return (Number.isInteger(number) && String(number)?.length === 10) || 'El campo {_field_} debe tener 10 dígitos'
+    } else return 'El primer dígito no es válido.'
   },
 })
 

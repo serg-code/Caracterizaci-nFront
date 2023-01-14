@@ -11,6 +11,8 @@
         <input-pregunta
             :respuesta="model.respuestas.adul_valoracion_peso"
             :pregunta="preguntasIntegrante.adul_valoracion_peso"
+            type="number"
+            decimal
             sm="4"
         />
         <input-pregunta
@@ -21,6 +23,11 @@
         <input-pregunta
             :respuesta="model.respuestas.adul_imc"
             :pregunta="preguntasIntegrante.adul_imc"
+            type="number"
+            decimal
+            readonly
+            :clearable="false"
+            :hint="hintIMC"
             sm="4"
         />
         <input-pregunta
@@ -78,6 +85,8 @@
             <input-pregunta
                 :respuesta="model.respuestas.adul_perimetro_abdominal"
                 :pregunta="preguntasIntegrante.adul_perimetro_abdominal"
+                type="number"
+                decimal
                 md="6"
             />
           </v-row>
@@ -186,6 +195,9 @@ export default {
       default: null
     }
   },
+  data:() =>({
+    hintIMC: ''
+  }),
   computed: {
     edad(){
       return this.integrante?.fecha_nacimiento && this.calculateAge(this.integrante.fecha_nacimiento) || null
@@ -234,6 +246,13 @@ export default {
       this.adulPlanifica()
       // this.juvCancerCuelloUterino()
       this.adulEsterilizacionFemenina()
+      this.calculaImc()
+    },
+    calculaImc(){
+      this.hintIMC = ''
+      const result = this.getIMC(this.model.respuestas.adul_valoracion_peso.model, this.model.respuestas.adul_valoracion_talla.model)
+      this.model.respuestas.adul_imc.model = result.resultado
+      this.hintIMC = result.hintIMC
     },
     adulEsterilizacionFemenina(){
       if (this.model.respuestas.adul_esterilizacion_femenina.model === integrante.adul_esterilizacion_femenina) {

@@ -11,6 +11,8 @@
         <input-pregunta
             :respuesta="model.respuestas.in_peso"
             :pregunta="preguntasIntegrante.in_peso"
+            type="number"
+            decimal
             sm="6"
         />
         <input-pregunta

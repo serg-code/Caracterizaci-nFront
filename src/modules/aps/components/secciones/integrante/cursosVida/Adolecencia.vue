@@ -11,6 +11,8 @@
         <input-pregunta
             :respuesta="model.respuestas.adol_peso"
             :pregunta="preguntasIntegrante.adol_peso"
+            type="number"
+            decimal
             sm="4"
         />
         <input-pregunta
@@ -21,6 +23,11 @@
         <input-pregunta
             :respuesta="model.respuestas.adol_imc"
             :pregunta="preguntasIntegrante.adol_imc"
+            type="number"
+            decimal
+            readonly
+            :clearable="false"
+            :hint="hintIMC"
             sm="4"
         />
         <input-pregunta
@@ -153,6 +160,9 @@ export default {
       default: null
     }
   },
+  data:() =>({
+    hintIMC: ''
+  }),
   computed: {
     keyRespuestas(){
       return this.model?.respuestas && Object.keys(this.model.respuestas) || []
@@ -203,6 +213,13 @@ export default {
     validaLogica() {
       this.adolVacunacion()
       this.adolPlanifica()
+      this.calculaImc()
+    },
+    calculaImc(){
+      this.hintIMC = ''
+      const result = this.getIMC(this.model.respuestas.adol_peso.model, this.model.respuestas.adol_talla.model)
+      this.model.respuestas.adol_imc.model = result.resultado
+      this.hintIMC = result.hintIMC
     },
     adolPlanifica(){
       if (this.model.respuestas.adol_planifica.model === integrante.adol_planifica) {

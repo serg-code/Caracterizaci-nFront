@@ -15,6 +15,8 @@
         <input-pregunta
             :respuesta="model.respuestas.pi_peso_al_nacer"
             :pregunta="preguntasIntegrante.pi_peso_al_nacer"
+            type="number"
+            decimal
             sm="6"
         />
         <input-pregunta
@@ -25,6 +27,8 @@
         <input-pregunta
             :respuesta="model.respuestas.pi_peso_actual"
             :pregunta="preguntasIntegrante.pi_peso_actual"
+            type="number"
+            decimal
             sm="6"
         />
         <input-pregunta

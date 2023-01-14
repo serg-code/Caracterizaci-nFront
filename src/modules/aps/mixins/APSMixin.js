@@ -109,6 +109,22 @@ export default {
             })
             return secciones
         },
+        getIMC(peso, talla) {
+            let hintIMC = ''
+            let resultado = null
+            if (Number(peso) && Number(talla)) {
+                resultado = Number((Number(peso) / Math.pow((Number(talla) / 100), 2)).toFixed(2))
+                if (resultado < 18.5) hintIMC = 'Bajo peso'
+                if (resultado >= 18.5 && resultado < 25) hintIMC = 'Peso normal'
+                if (resultado >= 25 && resultado < 30) hintIMC = 'Sobrepeso'
+                if (resultado >= 30 && resultado < 35) hintIMC = 'Obesidad (grado 1)'
+                if (resultado >= 35 && resultado < 40) hintIMC = 'Obesidad (grado 2)'
+                if (resultado >= 40) hintIMC = 'Obesidad (grado 3)'
+                return {resultado, hintIMC}
+            } else {
+                return {resultado, hintIMC}
+            }
+        },
         validadorSeccionIntegrante(seccion, integrante) {
             const edad = integrante?.fecha_nacimiento && this.calculateAge(integrante.fecha_nacimiento) || null
             const sexo = integrante?.sexo || null
@@ -188,7 +204,6 @@ export default {
                             })
                             seccion.show = false
                         } else {
-                            seccion.respuestas['juv_cancer_cuello_uterino'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
                             seccion.respuestas['in_vacuna_vph_d1'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
                             seccion.respuestas['in_vacuna_vph_d2'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)
                             seccion.respuestas['in_vacuna_vph_d3'].showSeccion = (edad.years >= 9 && edad.totalMonths <= 11)

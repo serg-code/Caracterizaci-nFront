@@ -53,7 +53,7 @@
         <input-pregunta
             :respuesta="model.respuestas.juv_parejas_sexuales_al_anio"
             :pregunta="preguntasIntegrante.juv_parejas_sexuales_al_anio"
-            sm="6"
+            md="6"
         />
 
         <v-col cols="12" class="pb-0">
@@ -124,6 +124,9 @@
         <input-pregunta
             :respuesta="model.respuestas.juv_perimetro_abdominal"
             :pregunta="preguntasIntegrante.juv_perimetro_abdominal"
+            type="number"
+            decimal
+            sm="6"
         />
       </v-row>
     </v-container>

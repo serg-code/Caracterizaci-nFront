@@ -8,6 +8,7 @@ import InputPassword from '@/components/input/InputPassword.vue'
 import InputSelect from '@/components/input/InputSelect.vue'
 import InputDate from '@/components/input/InputDate.vue'
 import InputTextArea from '@/components/input/InputTextArea.vue'
+import InputPhone from '@/components/input/InputPhone.vue'
 import ViewTitle from '@/components/ViewTitle.vue'
 import CTooltip from '@/components/CTooltip.vue'
 import CConfirm from '@/components/CConfirm.vue'
@@ -27,6 +28,7 @@ Vue.use({
     Vue.component('InputSelect', InputSelect)
     Vue.component('InputDate', InputDate)
     Vue.component('InputTextArea', InputTextArea)
+    Vue.component('InputPhone', InputPhone)
     Vue.component('CRows', CRows)
     Vue.component('OptionsButtons', OptionsButtons)
 

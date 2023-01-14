@@ -19,6 +19,8 @@
         :rules="rules"
         :readonly="readonly"
         :clearable="clearable"
+        :hint="hint"
+        :persistent-hint="!!hint"
     />
     <input-text
         v-if="pregunta.tipo === 'texto' || pregunta.tipo === 'numero'"
@@ -30,6 +32,8 @@
         :readonly="readonly"
         :clearable="clearable"
         :decimal="decimal"
+        :hint="hint"
+        :persistent-hint="!!hint"
     />
     <input-date
         v-if="pregunta.tipo === 'fecha'"
@@ -41,6 +45,8 @@
         :min="min"
         :readonly="readonly"
         :clearable="clearable"
+        :hint="hint"
+        :persistent-hint="!!hint"
     />
     <input-text-area
         v-if="pregunta.tipo === 'texto_largo'"
@@ -50,6 +56,8 @@
         :rules="rules"
         :readonly="readonly"
         :clearable="clearable"
+        :hint="hint"
+        :persistent-hint="!!hint"
     />
   </v-col>
 </template>
@@ -96,6 +104,10 @@ export default {
       default: '',
     },
     xl: {
+      type: String,
+      default: '',
+    },
+    hint: {
       type: String,
       default: '',
     },
