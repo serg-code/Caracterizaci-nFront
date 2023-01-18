@@ -10,46 +10,50 @@
           v-model="model"
           :editing.sync="editing"
       />
-      <integrantes-list
-          v-if="!editing"
-          v-model="model"
-          class="my-4"
-      />
-      <v-window
-          v-if="!editing"
-          v-model="step"
-          class="pa-1"
-      >
-        <template v-for="(seccion, indexSeccion) in seccionesHabilitadas">
-          <v-window-item
-              v-if="seccion.show"
-              :value="indexSeccion + 1"
-              :key="`${seccion.ref_seccion}Seccion${indexSeccion}`"
-              :id="`${seccion.ref_seccion}Seccion${indexSeccion}`"
-          >
-            <ValidationObserver
-                :ref="`${seccion.ref_seccion}Seccion${indexSeccion}`"
-                slim
+      <template v-if="!editing && model && model.realizo_encuesta">
+        <integrantes-list
+            v-model="model"
+            class="my-4"
+        />
+        <v-window
+            v-model="step"
+            class="pa-1"
+        >
+          <template v-for="(seccion, indexSeccion) in seccionesHabilitadas">
+            <v-window-item
+                v-if="seccion.show"
+                :value="indexSeccion + 1"
+                :key="`${seccion.ref_seccion}Seccion${indexSeccion}`"
+                :id="`${seccion.ref_seccion}Seccion${indexSeccion}`"
             >
-              <component
-                  :is="seccion.component"
-                  :seccion="seccion"
-                  style="margin-bottom: 60px !important;"
-              />
-              <navegacion-encuesta
-                  style="position: fixed;"
-                  :disabled-prev="step === 1"
-                  :next-btn="step !== seccionesHabilitadas.length"
-                  :save-btn="step === seccionesHabilitadas.length"
-                  @clickPrev="step--"
-                  @clickNext="guardarSeccion(`${seccion.ref_seccion}Seccion${indexSeccion}`)"
-                  @clickSave="guardarEncuesta"
-                  @clickFullSave="guardarEncuestaFull"
-              />
-            </ValidationObserver>
-          </v-window-item>
-        </template>
-      </v-window>
+              <ValidationObserver
+                  :ref="`${seccion.ref_seccion}Seccion${indexSeccion}`"
+                  slim
+              >
+                <component
+                    :is="seccion.component"
+                    :seccion="seccion"
+                    style="margin-bottom: 60px !important;"
+                />
+                <navegacion-encuesta
+                    style="position: fixed;"
+                    :disabled-prev="step === 1"
+                    :next-btn="step !== seccionesHabilitadas.length"
+                    :save-btn="step === seccionesHabilitadas.length"
+                    @clickPrev="step--"
+                    @clickNext="guardarSeccion(`${seccion.ref_seccion}Seccion${indexSeccion}`)"
+                    @clickSave="guardarEncuesta"
+                    @clickFullSave="guardarEncuestaFull"
+                />
+              </ValidationObserver>
+            </v-window-item>
+          </template>
+        </v-window>
+      </template>
+      <div v-if="model && !model.realizo_encuesta && model.motivos && model.motivosObj" class="title grey--text text-center mt-6">
+        <v-icon>mdi-alert</v-icon>
+        {{model.motivosObj.motivos}}
+      </div>
     </ValidationObserver>
     <global-loading :value="loading" absolute/>
   </v-container>
@@ -122,6 +126,7 @@ export default {
     async getComplementos() {
       await this.$store.dispatch('aps/getPreguntas')
       await this.$store.dispatch('aps/getTiposIdentificacion')
+      await this.$store.dispatch('aps/getTipos')
     },
     async guardarEncuesta() {
       this.loading = true

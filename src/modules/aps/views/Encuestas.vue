@@ -39,8 +39,7 @@
               </template>
               <template v-slot:item.ubicacion="{ item }">
                 <div style="display: grid;">
-                  <span>{{ item.municipio }}</span>
-                  <span>{{ item.departamento }}</span>
+                  {{item.municipio ? [item.municipio.nombre, item.municipio?.departamento ? item.municipio?.departamento.nombre : ''].filter(x => x).join(', ') : ''}}
                 </div>
               </template>
               <template v-slot:item.puntaje_obtenido="{ item }">

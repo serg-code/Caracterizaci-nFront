@@ -219,7 +219,7 @@ export default {
                         }
                         break
                     }
-                    case 'adolecencia': {
+                    case 'adolescencia': {
                         if (edad?.years <= 11 || edad?.years >= 18) {
                             Object.values(seccion.respuestas).forEach(x => {
                                 x.model = null
@@ -245,8 +245,10 @@ export default {
                         } else {
                             seccion.respuestas['juv_cancer_cuello_uterino'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['juv_colposcopia'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_control_medico_examen_colposcopia'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['juv_bioscopia_cervico'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['juv_examen_seno'].showSeccion = sexo === 'Femenino'
+                            seccion.respuestas['juv_control_medico_examen_seno'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['juv_planifica'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['juv_metodo_planifica'].showSeccion = sexo === 'Femenino'
                             seccion.respuestas['juv_tiempo_metodo'].showSeccion = sexo === 'Femenino'

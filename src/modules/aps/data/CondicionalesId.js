@@ -37,6 +37,8 @@ const integrante = {
     adol_planifica: 542, // SI
     // Juventud
     juv_cancer_cuello_uterino: 592, // ANORMAL
+    juv_colposcopia: 594, // NO (habilitar campo de control médico)
+    juv_examen_seno: 601, // ANORMAL (habilitar campo de control médico)
     juv_planifica: 603, // SI
     juv_esterilizacion_femenina: 641, // SI
     // Adultez

@@ -20,12 +20,20 @@
             :pregunta="preguntasIntegrante.juv_colposcopia"
         />
         <input-pregunta
+            :respuesta="model.respuestas.juv_control_medico_examen_colposcopia"
+            :pregunta="preguntasIntegrante.juv_control_medico_examen_colposcopia"
+        />
+        <input-pregunta
             :respuesta="model.respuestas.juv_bioscopia_cervico"
             :pregunta="preguntasIntegrante.juv_bioscopia_cervico"
         />
         <input-pregunta
             :respuesta="model.respuestas.juv_examen_seno"
             :pregunta="preguntasIntegrante.juv_examen_seno"
+        />
+        <input-pregunta
+            :respuesta="model.respuestas.juv_control_medico_examen_seno"
+            :pregunta="preguntasIntegrante.juv_control_medico_examen_seno"
         />
         <input-pregunta
             :respuesta="model.respuestas.juv_planifica"
@@ -201,6 +209,24 @@ export default {
       this.juvPlanifica()
       this.juvCancerCuelloUterino()
       this.juvEsterilizacionFemenina()
+      this.juvColposcopia()
+      this.juvExamenSeno()
+    },
+    juvExamenSeno(){
+      if (this.model.respuestas.juv_examen_seno.model === integrante.juv_examen_seno) {
+        this.model.respuestas.juv_control_medico_examen_seno.show = true
+      } else {
+        this.model.respuestas.juv_control_medico_examen_seno.show = false
+        this.model.respuestas.juv_control_medico_examen_seno.model = null
+      }
+    },
+    juvColposcopia(){
+      if (this.model.respuestas.juv_colposcopia.model === integrante.juv_colposcopia) {
+        this.model.respuestas.juv_control_medico_examen_colposcopia.show = true
+      } else {
+        this.model.respuestas.juv_control_medico_examen_colposcopia.show = false
+        this.model.respuestas.juv_control_medico_examen_colposcopia.model = null
+      }
     },
     juvEsterilizacionFemenina(){
       if (this.model.respuestas.juv_esterilizacion_femenina.model === integrante.juv_esterilizacion_femenina) {

@@ -7,8 +7,10 @@ const Juventud = {
     respuestas: {
         juv_cancer_cuello_uterino: PropsRespuesta,
         juv_colposcopia: PropsRespuesta,
+        juv_control_medico_examen_colposcopia: PropsRespuesta,
         juv_bioscopia_cervico: PropsRespuesta,
         juv_examen_seno: PropsRespuesta,
+        juv_control_medico_examen_seno: PropsRespuesta,
         juv_planifica: PropsRespuesta,
         juv_metodo_planifica: PropsRespuesta,
         juv_tiempo_metodo: PropsRespuesta,

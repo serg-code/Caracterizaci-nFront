@@ -20,6 +20,9 @@ const Hogar = {
     puntaje_max: 0,
     puntaje_obtenido: 0,
     estado_registro: 'ABIERTO',
+    realizo_encuesta: 1,
+    motivos: null,
+    motivosObj: null,
     secciones: {
         vivienda: Vivienda,
         animales: Animales,

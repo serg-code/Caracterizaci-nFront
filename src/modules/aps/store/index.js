@@ -14,6 +14,7 @@ const state = {
     preguntasIntegrante: null,
     hogares: null,
     tiposIdentificacion:[],
+    motivos_no_responde:[],
     rhs: Rhs,
     estadosCiviles: EstadosCiviles,
 }
@@ -39,8 +40,21 @@ const actions = {
         return await new Promise(resolve => {
             Vue.axios.get('tipo-identificacion')
                 .then(({data}) => {
-                    console.log('dataaaaaa', data)
                     context.commit('setTiposIdentificacion', data?.data?.tipos_identificacion || null)
+                    resolve(true)
+                })
+                .catch(error => {
+                    context.commit('snackbar/setError', { color: 'error', error }, { root: true })
+                    resolve(false)
+                })
+        })
+    },
+    async getTipos(context) {
+        return await new Promise(resolve => {
+            Vue.axios.get('tipos')
+                .then(({data}) => {
+                    console.log('data tipos', data?.data)
+                    context.commit('setTipos', data?.data || null)
                     resolve(true)
                 })
                 .catch(error => {
@@ -58,6 +72,9 @@ const mutations = {
     },
     setTiposIdentificacion(state, data) {
         state.tiposIdentificacion = data
+    },
+    setTipos(state, data) {
+        state.motivos_no_responde = data?.motivos_no_responde || []
     }
 }
 

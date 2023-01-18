@@ -101,6 +101,35 @@
                 rules="required"
             />
           </v-col>
+          <v-col cols="12" md="4">
+            <v-switch
+                v-model="model.realizo_encuesta"
+                inset
+                :false-value="0"
+                :true-value="1"
+                class="ma-0 mt-1"
+                label="Realiza encuesta"
+                hide-details
+                @change="changeRealiza"
+            />
+          </v-col>
+          <v-col
+              v-if="!model.realizo_encuesta"
+              cols="12"
+              md="8"
+          >
+            <input-select
+                v-model="model.motivos"
+                :items="motivos_no_responde"
+                item-text="motivos"
+                item-value="id"
+                name="Motivo no responde"
+                label="Motivo no responde"
+                no-radio
+                rules="required"
+                @inputObject="val => model.motivosObj = val"
+            />
+          </v-col>
         </v-row>
       </v-container>
     </ValidationObserver>
@@ -144,7 +173,7 @@ export default {
     loading: false
   }),
   computed: {
-    ...mapState('aps',['departamentos', 'municipios', 'zonas']),
+    ...mapState('aps',['departamentos', 'municipios', 'zonas', 'motivos_no_responde']),
     municipiosHogar() {
       return (this.model?.cod_dpto && this.municipios?.length && this.municipios.filter(x => x.codigo_departamento === this.model.cod_dpto)) || []
     }
@@ -187,6 +216,9 @@ export default {
     },
     changeZona() {
       this.model.barrio_vereda_id = null
+    },
+    changeRealiza() {
+      if(!this.model.realizo_encuesta) this.model.motivos = null
     },
     editar() {
       this.$emit('update:editing', true)

@@ -1,7 +1,7 @@
 import PropsRespuesta from '@/modules/aps/models/PropsRespuesta'
 const Adolecencia = {
     component: 'Adolecencia',
-    ref_seccion: 'adolecencia',
+    ref_seccion: 'adolescencia',
     descripcion: 'Adolecencia',
     show: true,
     respuestas: {

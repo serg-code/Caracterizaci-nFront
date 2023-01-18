@@ -38,7 +38,7 @@ const Integrante = {
         materno_perinatal: MaternoPerinatal,
         primera_infancia: PrimeraInfancia,
         infancia: Infancia,
-        adolecencia: Adolecencia,
+        adolescencia: Adolecencia,
         juventud: Juventud,
         adultez: Adultez,
         vejez: Vejez,
