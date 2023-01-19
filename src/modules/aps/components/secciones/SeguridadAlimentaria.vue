@@ -13,6 +13,10 @@
             :pregunta="preguntas.falto_dinero"
         />
         <input-pregunta
+            :respuesta="model.respuestas.animales_silvestres"
+            :pregunta="preguntas.animales_silvestres"
+        />
+        <input-pregunta
             :respuesta="model.respuestas.consume_cerdo_res_pollo"
             :pregunta="preguntas.consume_cerdo_res_pollo"
         />

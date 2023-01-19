@@ -47,8 +47,8 @@
               <template v-slot:item.puntaje_obtenido="{ item }">
                 <v-progress-linear
                     v-if="item.puntaje_obtenido && item.puntaje_max"
-                    :value="((item.puntaje_obtenido*100)/item.puntaje_max).toFixed(2)"
-                    :color="item.puntaje_obtenido <= 30 ? 'success' : item.puntaje_obtenido <= 60 ? 'warning' : 'error'"
+                    :value="calculaPorcentaje(item)"
+                    :color="calculaPorcentaje(item) <= 30 ? 'success' : calculaPorcentaje(item) <= 60 ? 'warning' : 'error'"
                     height="25"
                 >
                   <template v-slot:default="{ value }">
@@ -91,8 +91,11 @@
 </template>
 
 <script>
+import APSMixin from '@/modules/aps/mixins/APSMixin'
+
 export default {
   name: 'ListIntegrantes',
+  mixins:[APSMixin],
   data:() => ({
     itemsHeaders: [
       {

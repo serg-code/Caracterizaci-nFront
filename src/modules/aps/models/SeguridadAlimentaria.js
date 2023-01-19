@@ -6,6 +6,7 @@ const SeguridadAlimentaria = {
     show: true,
     respuestas: {
         falto_dinero: PropsRespuesta,
+        animales_silvestres: PropsRespuesta,
         consume_cerdo_res_pollo: PropsRespuesta,
         consume_huevos: PropsRespuesta,
         consume_frijol_lentejas: PropsRespuesta,

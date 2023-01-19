@@ -87,6 +87,16 @@ export default {
                     })
             })
         },
+        fueraRespuesta(respuesta) {
+            respuesta.show = false
+            respuesta.model = null
+            respuesta.valor = 0
+            return respuesta
+        },
+        calculaRiesgoIntegrante(copiaIntegrante) {
+            console.log('copiaIntegrante', copiaIntegrante)
+            return copiaIntegrante
+        },
         convertirDataIntegrante(dataEncuesta, copiaIntegrante) {
             if (!copiaIntegrante.id) copiaIntegrante.id = uuid.v1()
             copiaIntegrante.hogar_id = dataEncuesta.id
@@ -124,6 +134,9 @@ export default {
             } else {
                 return {resultado, hintIMC}
             }
+        },
+        calculaPorcentaje(item) {
+            return item.puntaje_obtenido && item.puntaje_max ? ((item.puntaje_obtenido*100)/item.puntaje_max).toFixed(2) : 0
         },
         validadorSeccionIntegrante(seccion, integrante) {
             const edad = integrante?.fecha_nacimiento && this.calculateAge(integrante.fecha_nacimiento) || null

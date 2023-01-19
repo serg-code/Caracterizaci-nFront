@@ -29,8 +29,10 @@
 import { mapState } from 'vuex'
 import InputPregunta from '@/modules/aps/components/InputPregunta'
 import { integrante } from '@/modules/aps/data/CondicionalesId'
+import APSMixin from '@/modules/aps/mixins/APSMixin'
 export default {
   name: 'IntegranteAccidentes',
+  mixins: [APSMixin],
   components: {InputPregunta},
   props: {
     seccion: {
@@ -59,15 +61,12 @@ export default {
     }
   },
   methods: {
-    validaLogica() {
-      this.accidentesTransito()
+    async validaLogica() {
+      await this.accidentesTransito()
     },
     accidentesTransito(){
       if(this.model.respuestas.accidentes_transito.model === integrante.accidentes_transito) this.model.respuestas.tipo_lesion.show = true
-      else {
-        this.model.respuestas.tipo_lesion.show = false
-        this.model.respuestas.tipo_lesion.model = null
-      }
+      else this.model.respuestas.tipo_lesion = this.fueraRespuesta(this.model.respuestas.tipo_lesion)
     }
   }
 }

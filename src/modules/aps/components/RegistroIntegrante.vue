@@ -195,7 +195,8 @@ export default {
       this.$refs.formEncuestaIntegrante.validate().then(async result => {
         if (result) {
           this.loading = true
-          const data = this.convertirDataIntegrante(this.clone(this.vmodel), this.clone(this.model))
+          const dataRiesgo = this.calculaRiesgoIntegrante(this.clone(this.model))
+          const data = this.convertirDataIntegrante(this.clone(this.vmodel), dataRiesgo)
           const response = await this.integranteSaveFull({integrante: data.dataIntegrante, encuesta: data.dataEncuesta.encuesta})
           if(response) {
             this.vmodel = data.dataEncuesta.encuesta
