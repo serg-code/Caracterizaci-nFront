@@ -11,6 +11,7 @@ const IdentificacionCiudadana = {
         cual_programa: PropsRespuesta,
         seguridad_social: PropsRespuesta,
         esta_estudiando: PropsRespuesta,
+        tipo_educacion: PropsRespuesta,
         por_que: PropsRespuesta,
         ocupacion_ingreso: PropsRespuesta,
         discapacidad: PropsRespuesta,

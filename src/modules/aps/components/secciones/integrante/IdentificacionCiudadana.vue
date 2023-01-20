@@ -33,6 +33,10 @@
             :pregunta="preguntasIntegrante.esta_estudiando"
         />
         <input-pregunta
+            :respuesta="model.respuestas.tipo_educacion"
+            :pregunta="preguntasIntegrante.tipo_educacion"
+        />
+        <input-pregunta
             :respuesta="model.respuestas.por_que"
             :pregunta="preguntasIntegrante.por_que"
         />
@@ -100,10 +104,20 @@ export default {
       }
     },
     estaEstudiando(){
-      if(this.model.respuestas.esta_estudiando.model === integrante.esta_estudiando) this.model.respuestas.por_que.show = true
+      if(this.model.respuestas.esta_estudiando.model === integrante.esta_estudiando) {
+        this.model.respuestas.por_que.show = true
+      }
       else {
         this.model.respuestas.por_que.show = false
         this.model.respuestas.por_que.model = null
+      }
+
+      if(this.model.respuestas.esta_estudiando.model === integrante.esta_estudiando_si) {
+        this.model.respuestas.tipo_educacion.show = true
+      }
+      else {
+        this.model.respuestas.tipo_educacion.show = false
+        this.model.respuestas.tipo_educacion.model = null
       }
     },
     programas(){

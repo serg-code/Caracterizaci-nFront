@@ -461,23 +461,32 @@ export default {
     maGestacion(){
       if(this.model.respuestas.ma_gestacion.model >= 12) {
         this.model.respuestas.ma_examen_serologia_1_trimestre.show = true
+        this.model.respuestas.ma_examen_vih_1_trimestre.show = true
       } else {
         this.model.respuestas.ma_examen_serologia_1_trimestre.show = false
         this.model.respuestas.ma_examen_serologia_1_trimestre.model = null
+        this.model.respuestas.ma_examen_vih_1_trimestre.show = false
+        this.model.respuestas.ma_examen_vih_1_trimestre.model = null
       }
 
       if(this.model.respuestas.ma_gestacion.model >= 24) {
         this.model.respuestas.ma_examen_serologia_2_trimestre.show = true
+        this.model.respuestas.ma_examen_vih_2_trimestre.show = true
       } else {
         this.model.respuestas.ma_examen_serologia_2_trimestre.show = false
         this.model.respuestas.ma_examen_serologia_2_trimestre.model = null
+        this.model.respuestas.ma_examen_vih_2_trimestre.show = false
+        this.model.respuestas.ma_examen_vih_2_trimestre.model = null
       }
 
       if(this.model.respuestas.ma_gestacion.model >= 36) {
         this.model.respuestas.ma_examen_serologia_3_trimestre.show = true
+        this.model.respuestas.ma_examen_vih_3_trimestre.show = true
       } else {
         this.model.respuestas.ma_examen_serologia_3_trimestre.show = false
         this.model.respuestas.ma_examen_serologia_3_trimestre.model = null
+        this.model.respuestas.ma_examen_vih_3_trimestre.show = false
+        this.model.respuestas.ma_examen_vih_3_trimestre.model = null
       }
     },
     maFechaUltimaRegla(){

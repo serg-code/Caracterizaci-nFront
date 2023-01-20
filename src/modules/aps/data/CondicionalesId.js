@@ -16,6 +16,7 @@ const integrante = {
     // IdentificacionCiudadana
     programas: 186, // SI
     esta_estudiando: 202, // NO
+    esta_estudiando_si: 203, // SI
     discapacidad: 223, // diferente de ninguna => NINGUNA
     // CuidadosEnfermedades
     ha_estado_embarazada: 92, // SI
