@@ -34,6 +34,8 @@ const Integrante = {
     puntaje_obtenido: 0,
     puntaje_max: 0,
     estado_registro: 'ABIERTO',
+    porcentaje: null,
+    color: null,
     secciones: {
         materno_perinatal: MaternoPerinatal,
         primera_infancia: PrimeraInfancia,

@@ -21,7 +21,7 @@
     LegendComponent
   } from 'echarts/components'
   import VChart, { THEME_KEY } from 'vue-echarts'
-  import {ref, defineComponent, computed} from 'vue'
+  import {ref, defineComponent} from 'vue'
 
   use([
     CanvasRenderer,
@@ -37,6 +37,10 @@
       VChart
     },
     props:{
+      porcentaje: {
+        type: Number,
+        default: null
+      },
       puntaje: {
         type: Number,
         default: 0
@@ -53,7 +57,6 @@
       const charGauge = ref(null)
       const total = props.maximo
       const value = props.puntaje
-      const percetn = computed(() => option.value.series[0].data[0].value / total)
       const option = ref({
         overflow: 'hidden',
         renderer: 'canvas',
@@ -92,16 +95,6 @@
                 width: 2
               }
             },
-            // axisTick: {
-            //   show: false,
-            //   splitNumber: 2,
-            //   distance: 6,
-            //   length: 6,
-            //   lineStyle: {
-            //     color: '#555',
-            //     width: 1
-            //   }
-            // },
             axisLabel: {
               color: '#555',
               distance: 20,
@@ -156,11 +149,7 @@
           }
         ]
       })
-      // setTimeout(() => {
-      //   const elChart = document.querySelector('.chart')
-      //   elChart.style.height = '250px'
-      // }, 4000)
-      return { option, percetn, charGauge };
+      return { option, charGauge };
     }
   });
 </script>

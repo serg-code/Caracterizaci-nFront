@@ -47,8 +47,8 @@
               <template v-slot:item.puntaje_obtenido="{ item }">
                 <v-progress-linear
                     v-if="item.puntaje_obtenido && item.puntaje_max"
-                    :value="calculaPorcentaje(item)"
-                    :color="calculaPorcentaje(item) <= 30 ? 'success' : calculaPorcentaje(item) <= 60 ? 'warning' : 'error'"
+                    :value="item.porcentaje"
+                    :color="item.color"
                     height="25"
                 >
                   <template v-slot:default="{ value }">

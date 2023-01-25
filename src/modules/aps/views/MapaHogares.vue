@@ -114,7 +114,6 @@ export default {
       // this.axios.get( `${ruta}${ruta.indexOf('?') > -1 ? '&' : '?'}per_page=5000`)
       this.axios.get(`${ruta}?per_page=5000`)
           .then(async response => {
-            console.log('response', response)
             this.datos = await response?.data?.data?.data?.filter(x => x.geolocalizacion) || []
             if (this.togglebtn) {
               this.goCalor()
@@ -160,23 +159,22 @@ export default {
         content: ''
       });
       this.datos.forEach(x => {
-        console.log('xxx', x)
         // let latlan = x.coordenadas.replace(/ /g, '').split(',')
         let latlan = x.geolocalizacion.split(',')
-        // var circle = {
-        //   path: this.googleMaps.SymbolPath.CIRCLE,
-        //   fillColor: 'red',
-        //   fillOpacity: 0.8,
-        //   scale: 5,
-        //   strokeColor: 'red',
-        //   strokeWeight: 0
-        // };
-
+        var house = {
+          path: 'M19.07,4.93C17.22,3 14.66,1.96 12,2C9.34,1.96 6.79,3 4.94,4.93C3,6.78 1.96,9.34 2,12C1.96,14.66 3,17.21 4.93,19.06C6.78,21 9.34,22.04 12,22C14.66,22.04 17.21,21 19.06,19.07C21,17.22 22.04,14.66 22,12C22.04,9.34 21,6.78 19.07,4.93M17,12V18H13.5V13H10.5V18H7V12H5L12,5L19.5,12H17Z',
+          fillColor: x.color || 'black',
+          fillOpacity: 1,
+          scale: 1.4,
+          strokeColor: x.color || 'black',
+          strokeWeight: 0,
+          anchor: new this.googleMaps.Point(10, 10),
+        }
         let marker = new this.googleMaps.Marker({
           position: {lat: Number(latlan[0]), lng: Number(latlan[1])},
           // map: this.map,
           title: x.direccion || 'No reporta',
-          // icon: circle
+          icon: house
         });
         marker.addListener('click', () => {
           infowindow.setContent(this.textInfoWindow(x))

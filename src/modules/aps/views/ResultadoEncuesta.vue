@@ -9,6 +9,7 @@
     <v-row  v-if="model">
       <v-col cols="12" md="6" xl="4">
         <chart-test
+            :porcentaje="model.porcentaje"
             :puntaje="model.puntaje_obtenido"
             :maximo="model.puntaje_max"
         >
@@ -29,6 +30,7 @@
           xl="4"
       >
         <chart-test
+            :porcentaje="integrante.porcentaje"
             :puntaje="integrante.puntaje_obtenido"
             :maximo="integrante.puntaje_max"
         >

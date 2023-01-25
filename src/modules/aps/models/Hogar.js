@@ -23,6 +23,8 @@ const Hogar = {
     realizo_encuesta: 1,
     motivos: null,
     motivosObj: null,
+    porcentaje: null,
+    color: null,
     secciones: {
         vivienda: Vivienda,
         animales: Animales,
