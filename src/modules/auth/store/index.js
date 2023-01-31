@@ -49,9 +49,9 @@ const actions = {
     },
     async getUser(context) {
         return await new Promise(resolve => {
-            Vue.axios.get('usuarios')
+            Vue.axios.get('usuario')
                 .then(responseUser => {
-                    console.log('usuarios', responseUser)
+                    console.log('usuarios aa', responseUser)
                     // responseUser.data.user.user_permissions = responseUser.data.user_permissions
                     // context.commit('setUser', responseUser.data.user)
                     resolve(true)

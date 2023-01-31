@@ -27,7 +27,7 @@
       @close="dialog = false"
     >
       <template slot="title">{{ title }}</template>
-      <v-card-text>{{ subtitle }}</v-card-text>
+      <v-card-text v-if="subtitle">{{ subtitle }}</v-card-text>
       <v-card-text>
         <slot name="filters" />
       </v-card-text>

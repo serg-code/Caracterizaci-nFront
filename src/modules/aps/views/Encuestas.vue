@@ -20,7 +20,11 @@
             route="hogar"
             :make-headers="itemsHeaders"
             :initial-run="true"
+            advance-filters
+            filters-title="Filtros de encuestas"
+            filters-max-width="450"
         >
+          <filters slot="filters" />
           <template v-slot:rows="{ items, loading, headers }">
             <v-data-table
                 :headers="headers"
@@ -93,10 +97,13 @@
 
 <script>
 import APSMixin from '@/modules/aps/mixins/APSMixin'
-
+import Filters from '@/modules/aps/components/encuestas/Filters'
 export default {
   name: 'ListEncuestas',
   mixins:[APSMixin],
+  components:{
+    Filters
+  },
   data:() => ({
     itemsHeaders: [
       {

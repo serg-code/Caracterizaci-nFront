@@ -7,6 +7,7 @@ import InputText from '@/components/input/InputText.vue'
 import InputPassword from '@/components/input/InputPassword.vue'
 import InputSelect from '@/components/input/InputSelect.vue'
 import InputDate from '@/components/input/InputDate.vue'
+import InputDateRange from '@/components/input/InputDateRange.vue'
 import InputTextArea from '@/components/input/InputTextArea.vue'
 import InputPhone from '@/components/input/InputPhone.vue'
 import ViewTitle from '@/components/ViewTitle.vue'
@@ -27,6 +28,7 @@ Vue.use({
     Vue.component('InputPassword', InputPassword)
     Vue.component('InputSelect', InputSelect)
     Vue.component('InputDate', InputDate)
+    Vue.component('InputDateRange', InputDateRange)
     Vue.component('InputTextArea', InputTextArea)
     Vue.component('InputPhone', InputPhone)
     Vue.component('CRows', CRows)

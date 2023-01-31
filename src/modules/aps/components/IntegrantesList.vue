@@ -10,8 +10,13 @@
         Integrantes
       </v-badge>
       <v-spacer />
-      <v-btn color="primary" @click="nuevoIntegrante">
-        Nuevo integrante
+      <v-btn
+          color="primary"
+          :fab="$vuetify.breakpoint.xsOnly"
+          @click="nuevoIntegrante"
+      >
+        {{ $vuetify.breakpoint.xsOnly ? '' : 'Nuevo integrante' }}
+        <v-icon v-if="$vuetify.breakpoint.xsOnly">mdi-plus</v-icon>
       </v-btn>
       <v-btn
           v-if="integrantes.length"
