@@ -13,6 +13,7 @@ import InputPhone from '@/components/input/InputPhone.vue'
 import ViewTitle from '@/components/ViewTitle.vue'
 import CTooltip from '@/components/CTooltip.vue'
 import CConfirm from '@/components/CConfirm.vue'
+import CChip from '@/components/CChip.vue'
 import CRows from '@/components/cDataRows/components/CRows.vue'
 import OptionsButtons from '@/components/OptionsButtons.vue'
 
@@ -23,6 +24,7 @@ Vue.use({
     Vue.component('BaseCard', BaseCard)
     Vue.component('CTooltip', CTooltip)
     Vue.component('CConfirm', CConfirm)
+    Vue.component('CChip', CChip)
     Vue.component('GlobalLoading', Loading)
     Vue.component('InputText', InputText)
     Vue.component('InputPassword', InputPassword)

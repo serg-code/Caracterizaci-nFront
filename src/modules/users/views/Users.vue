@@ -2,7 +2,11 @@
   <v-container>
     <view-title>
       <template v-slot:action>
-        <c-tooltip tooltip="Nuevo usuario" top>
+        <c-tooltip
+            v-if="permisos.crear"
+            top
+            tooltip="Nuevo usuario"
+        >
           <v-btn
               color="primary"
               @click="register(null)"
@@ -46,7 +50,7 @@
               <template v-slot:item.options="{ item }">
                 <options-buttons
                     :loading="item.loading"
-                    edit-button
+                    :edit-button="permisos.editar"
                     @edit="register(item)"
                     top
                 />
@@ -66,6 +70,7 @@
 
 <script>
 import RegisterUser from '@/modules/users/components/RegisterUser'
+import store from "@/store";
 export default {
   name: 'ListUsers',
   components: {RegisterUser},
@@ -87,6 +92,11 @@ export default {
     registerDialog: false,
     selectedItem: null,
   }),
+  computed: {
+    permisos () {
+      return store.getters['auth/permissionsByModule']('usuarios')
+    }
+  },
   methods: {
     register(item) {
       this.selectedItem = item

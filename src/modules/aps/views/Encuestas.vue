@@ -2,7 +2,11 @@
   <v-container>
     <view-title>
       <template v-slot:action>
-        <c-tooltip tooltip="Nueva encuesta" top>
+        <c-tooltip
+            v-if="permisos.crear"
+            tooltip="Nueva encuesta"
+            top
+        >
           <v-btn
               color="primary"
               :to="{name: 'RegistroEncuestaAPS'}"
@@ -25,6 +29,9 @@
             filters-max-width="450"
         >
           <filters slot="filters" />
+          <template v-slot:filterstags="{ tags }">
+            <tags-filters :tags="tags" />
+          </template>
           <template v-slot:rows="{ items, loading, headers }">
             <v-data-table
                 :headers="headers"
@@ -65,11 +72,12 @@
               <template v-slot:item.options="{ item }">
                 <options-buttons
                     :loading="item.loading"
-                    edit-button
+                    :edit-button="permisos.editar"
                     @edit="$router.push(`/aps/registro-encuesta/${item.id}`)"
                     top
                 >
                   <c-tooltip
+                      v-if="permisos.resultados"
                       top
                       tooltip="Ir a los resultados"
                   >
@@ -98,10 +106,13 @@
 <script>
 import APSMixin from '@/modules/aps/mixins/APSMixin'
 import Filters from '@/modules/aps/components/encuestas/Filters'
+import TagsFilters from '@/modules/aps/components/encuestas/TagsFilters'
+import store from '@/store'
 export default {
   name: 'ListEncuestas',
   mixins:[APSMixin],
   components:{
+    TagsFilters,
     Filters
   },
   data:() => ({
@@ -127,6 +138,11 @@ export default {
         visibleColumnSelectable: false,
       }
     ]
-  })
+  }),
+  computed: {
+    permisos () {
+      return store.getters['auth/permissionsByModule']('hogar')
+    }
+  }
 }
 </script>

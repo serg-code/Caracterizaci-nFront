@@ -62,5 +62,14 @@ export const itemsMenu = [
         color: 'indigo',
         routeName: 'MapaHogaresAPS',
         typeRoute: 'aps'
+    },
+    {
+        id: 'reportes',
+        title: 'Reportes',
+        subtitle: 'Descarga de reportes',
+        icon: 'mdi-file-table',
+        color: 'green',
+        routeName: 'Reportes',
+        typeRoute: 'administrativo'
     }
 ]

@@ -2,7 +2,11 @@
   <v-container>
     <view-title>
       <template v-slot:action>
-        <c-tooltip tooltip="Nuevo rol" top>
+        <c-tooltip
+            v-if="permisos.crear"
+            tooltip="Nuevo rol"
+            top
+        >
           <v-btn
               color="primary"
               @click="register(null)"
@@ -23,6 +27,7 @@
         >
           <template v-slot:item.options="{ item }">
             <c-tooltip
+                v-if="permisos.editar"
                 top
                 tooltip="Editar"
             >
@@ -53,6 +58,7 @@
 
 <script>
 import RegisterRol from '@/modules/roles/components/RegisterRol'
+import store from "@/store";
 export default {
   name: 'ListRoles',
   components: {RegisterRol},
@@ -72,6 +78,11 @@ export default {
     registerDialog: false,
     selectedItem: null,
   }),
+  computed: {
+    permisos () {
+      return store.getters['auth/permissionsByModule']('roles')
+    }
+  },
   created() {
     this.rowsReload()
   },

@@ -8,7 +8,8 @@ export default {
             path: 'integrantes',
             component: () => import('@/modules/aps/views/Integrantes.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'integrante.listar',
                 title: 'Encuestados APS',
                 footer: true
             }
@@ -18,7 +19,8 @@ export default {
             path: 'encuestas',
             component: () => import('@/modules/aps/views/Encuestas.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'hogar.listar',
                 title: 'Encuestas APS',
                 footer: true
             }
@@ -29,7 +31,8 @@ export default {
             props: true,
             component: () => import('@/modules/aps/views/RegistroEncuesta.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'hogar.crear',
                 title: 'Registro de encuesta',
                 footer: true
             }
@@ -40,7 +43,8 @@ export default {
             props: true,
             component: () => import('@/modules/aps/views/ResultadoEncuesta.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'hogar.resultados',
                 title: 'Resultado de encuesta',
                 footer: true
             }
@@ -50,7 +54,8 @@ export default {
             path: 'areas-territoriales',
             component: () => import('@/modules/aps/views/AreasTerritoriales.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'BarrioVereda.listar',
                 title: 'Areas territoriales',
                 footer: true
             }
@@ -60,7 +65,8 @@ export default {
             path: 'georreferenciacion-hogares',
             component: () => import('@/modules/aps/views/MapaHogares.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'mapa.ver',
                 title: 'Georreferenciación hogares',
                 footer: true
             }

@@ -8,7 +8,8 @@ export default {
             path: '/roles',
             component: () => import('@/modules/roles/views/Roles.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'roles.listar',
                 title: 'Roles',
                 footer: true
             }

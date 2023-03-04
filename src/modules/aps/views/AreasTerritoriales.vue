@@ -2,7 +2,11 @@
   <v-container>
     <view-title>
       <template v-slot:action>
-        <c-tooltip tooltip="Nueva área territorial" top>
+        <c-tooltip
+            v-if="permisos.crear"
+            top
+            tooltip="Nueva área territorial"
+        >
           <v-btn
               color="primary"
               @click="register(null)"
@@ -41,9 +45,9 @@
                 <options-buttons
                     :loading="item.loading"
                     top
-                    edit-button
+                    :edit-button="permisos.editar"
                     @edit="register(item)"
-                    delete-button
+                    :delete-button="permisos.eliminar"
                     @delete="deleteConfirm(item)"
                 />
               </template>
@@ -74,6 +78,7 @@
 
 <script>
 import RegistroAreaTerritorial from '@/modules/aps/components/areasTerritoriales/RegistroAreaTerritorial'
+import store from "@/store";
 export default {
   name: 'AreasTerritoriales',
   components: {RegistroAreaTerritorial},
@@ -97,6 +102,11 @@ export default {
     showConfirm: false,
     loadingConfirm: false,
   }),
+  computed: {
+    permisos () {
+      return store.getters['auth/permissionsByModule']('BarrioVereda')
+    }
+  },
   methods: {
     register(item) {
       this.selectedItem = item

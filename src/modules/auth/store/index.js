@@ -9,8 +9,8 @@ const state = {
 
 const getters = {
     permissions: state => {
-        if (state.user && state.user.user_permissions && state.user.user_permissions.length) {
-            return state.user.user_permissions.reduce((value, key) => {
+        if (state.user?.permisos?.length) {
+            return state.user.permisos.reduce((value, key) => {
                 value[key] = value[key] || true
                 return value
             }, {})
@@ -18,11 +18,11 @@ const getters = {
         return {}
     },
     permissionByName: state => name => {
-        return name ? state.user?.user_permissions?.length && !!state.user.user_permissions.find(x => x.toString() === name.toString()) : true
+        return name ? state.user?.permisos?.length && !!state.user.permisos.find(x => x.referencia.toString() === name.toString()) : true
     },
     permissionsByModule: state => modulo => {
-        if (state.user && state.user.user_permissions && state.user.user_permissions.length) {
-            return state.user.user_permissions.filter(x => x.toString().toLowerCase().split('.')[0] ===  modulo.toString().toLowerCase()).map(x => x.split(`${modulo}.`)[1]).reduce((value, key) => {
+        if (state.user?.permisos?.length) {
+            return state.user.permisos.filter(x => x.referencia.toString().toLowerCase().split('.')[0] ===  modulo.toString().toLowerCase()).map(x => x.referencia.split(`${modulo}.`)[1]).reduce((value, key) => {
                 value[key] = value[key] || true
                 return value
             }, {})
@@ -50,10 +50,8 @@ const actions = {
     async getUser(context) {
         return await new Promise(resolve => {
             Vue.axios.get('usuario')
-                .then(responseUser => {
-                    console.log('usuarios aa', responseUser)
-                    // responseUser.data.user.user_permissions = responseUser.data.user_permissions
-                    // context.commit('setUser', responseUser.data.user)
+                .then(({data}) => {
+                    context.commit('setUser', data?.data?.usuario || null)
                     resolve(true)
                 })
                 .catch(() => {

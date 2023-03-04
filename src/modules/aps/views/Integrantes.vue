@@ -65,6 +65,7 @@
                     :loading="item.loading"
                 >
                   <c-tooltip
+                      v-if="permisos.hogar.editar"
                       top
                       tooltip="Ir a la encuesta"
                   >
@@ -92,6 +93,7 @@
 
 <script>
 import APSMixin from '@/modules/aps/mixins/APSMixin'
+import store from "@/store";
 
 export default {
   name: 'ListIntegrantes',
@@ -119,6 +121,12 @@ export default {
         visibleColumnSelectable: false,
       }
     ]
-  })
+  }),
+  permisos () {
+    return {
+      hogar: store.getters['auth/permissionsByModule']('hogar'),
+      integrante: store.getters['auth/permissionsByModule']('integrante'),
+    }
+  }
 }
 </script>

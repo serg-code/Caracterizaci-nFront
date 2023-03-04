@@ -8,7 +8,8 @@ export default {
             path: '/users',
             component: () => import('@/modules/users/views/Users.vue'),
             meta: {
-                requiresAuth: true,
+                requireAuth: true,
+                permission: 'usuarios.crear',
                 title: 'Usuarios',
                 footer: true
             }

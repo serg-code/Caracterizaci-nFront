@@ -8,6 +8,7 @@ import settings from '@/modules/settings/router'
 import aps from '@/modules/aps/router'
 import users from '@/modules/users/router'
 import roles from '@/modules/roles/router'
+import reports from '@/modules/reports/router'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,7 @@ const routes = [
     settings,
     auth,
     aps,
+    reports,
     users,
     roles
 ]
