@@ -1,4 +1,4 @@
-# sosaludaps.frontend
+# APS Barranquilla
 
 ## Project setup
 ```
