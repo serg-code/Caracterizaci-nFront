@@ -37,7 +37,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-    document.title = `SosaludAPS | ${to.meta.title}`
+    document.title = `APS Barranquilla | ${to.meta.title}`
     if (to.matched.some(record => record.meta.requireAuth)) {
         if (!store.state.auth.access_token) {
             next({name: 'Login'})
